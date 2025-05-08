@@ -1,0 +1,3 @@
+conda activate flower-recognition
+conda install pytorch torchvision scipy matplotlib pillow -c pytorch
+conda install tensorflow tensorflow-datasets

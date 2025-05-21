@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flower Recognition</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --primary-color: #4CAF50;
@@ -14,6 +15,8 @@
             --background-color: #F5F5F5;
             --card-color: #FFFFFF;
             --shadow: 0 2px 4px rgba(0,0,0,0.1);
+            --success: #4CAF50;
+            --error: #F44336;
         }
 
         body {
@@ -26,7 +29,7 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -162,6 +165,33 @@
             100% { transform: rotate(360deg); }
         }
 
+        .verification-section {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            display: none;
+        }
+
+        .verification-result {
+            margin-top: 15px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .correct {
+            color: var(--success);
+        }
+
+        .incorrect {
+            color: var(--error);
+        }
+
+        .chart-container {
+            height: 300px;
+            margin-top: 20px;
+        }
+
         @media (min-width: 768px) {
             .main-content {
                 flex-direction: row;
@@ -177,7 +207,7 @@
     <header>
         <div class="container">
             <h1>Flower Recognition</h1>
-            <p>Upload a flower image to recognize</p>
+            <p>Upload a flower image to identify</p>
         </div>
     </header>
 
@@ -186,14 +216,14 @@
             <div class="upload-section">
                 <h2>Upload an image</h2>
                 <div id="drop-area" class="drop-area">
-                    <p>Drag the image here or click to upload</p>
+                    <p>Drag and drop an image here or click to select</p>
                     <input type="file" id="file-input" accept="image/*" style="display: none;">
                     <button id="upload-btn" class="btn">Select image</button>
                 </div>
 
                 <div id="preview-container" class="preview-container">
                     <h3>Preview:</h3>
-                    <img id="preview-image" class="preview-image" src="" alt="Preview imagine">
+                    <img id="preview-image" class="preview-image" src="" alt="Image preview">
                     <div style="margin-top: 15px;">
                         <button id="predict-btn" class="btn">Identify flower</button>
                         <button id="reset-btn" class="btn" style="background-color: #f44336; margin-left: 10px;">Reset</button>
@@ -202,7 +232,7 @@
 
                 <div id="loading" class="loading">
                     <div class="spinner"></div>
-                    <p>Proccesing image...</p>
+                    <p>Processing image...</p>
                 </div>
             </div>
 
@@ -210,6 +240,26 @@
                 <h2>Results</h2>
                 <p>Top 5 predictions:</p>
                 <div id="results-container"></div>
+
+                <!-- Chart container -->
+                <div class="chart-container">
+                    <canvas id="prediction-chart"></canvas>
+                </div>
+
+                <!-- Verification section -->
+                <div id="verification-section" class="verification-section">
+                    <h3>Do you know what flower is in the image?</h3>
+                    <p>Check if the model correctly identified it:</p>
+                    <select id="actual-flower" class="form-control">
+                        <option value="">-- Choose the correct flower --</option>
+                        <!-- Options will be populated from JavaScript -->
+                    </select>
+                    <button id="verify-btn" class="btn" style="margin-top: 10px;">Verify</button>
+
+                    <div id="verification-result" class="verification-result">
+                        <!-- Verification result will appear here -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -226,10 +276,42 @@
             const resultSection = document.getElementById('result-section');
             const resultsContainer = document.getElementById('results-container');
             const loading = document.getElementById('loading');
+            const verificationSection = document.getElementById('verification-section');
+            const actualFlowerSelect = document.getElementById('actual-flower');
+            const verifyBtn = document.getElementById('verify-btn');
+            const verificationResult = document.getElementById('verification-result');
 
             let currentImage = null;
+            let currentPredictions = null;
+            let predictionChart = null;
 
-            // Event listeners pentru drag & drop
+            // Populate flower dropdown
+            const populateFlowerDropdown = (flowerClasses) => {
+                actualFlowerSelect.innerHTML = '<option value="">-- Choose the correct flower --</option>';
+                flowerClasses.forEach((flowerClass, index) => {
+                    const option = document.createElement('option');
+                    option.value = flowerClass;
+                    option.textContent = flowerClass.charAt(0).toUpperCase() + flowerClass.slice(1);
+                    actualFlowerSelect.appendChild(option);
+                });
+            };
+
+            // Verification event
+            verifyBtn.addEventListener('click', function() {
+                const selectedFlower = actualFlowerSelect.value;
+                if (!selectedFlower || !currentPredictions) return;
+
+                const topPrediction = currentPredictions[0].class;
+                const isCorrect = selectedFlower === topPrediction;
+
+                verificationResult.innerHTML = isCorrect
+                    ? '<span class="correct">✓ Correct prediction! The model correctly identified the flower.</span>'
+                    : `<span class="incorrect">✗ Incorrect prediction! The correct flower was ${selectedFlower}, but the model predicted ${topPrediction}.</span>`;
+
+                verificationResult.style.display = 'block';
+            });
+
+            // Event listeners for drag & drop
             ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
                 dropArea.addEventListener(eventName, preventDefaults, false);
             });
@@ -255,7 +337,7 @@
                 dropArea.classList.remove('highlight');
             }
 
-            // Gestionare eveniment drop
+            // Drop event handler
             dropArea.addEventListener('drop', handleDrop, false);
 
             function handleDrop(e) {
@@ -264,12 +346,12 @@
                 handleFiles(files);
             }
 
-            // Click pe butonul de upload
+            // Upload button click
             uploadBtn.addEventListener('click', () => {
                 fileInput.click();
             });
 
-            // Gestionare fișier selectat
+            // File selection handler
             fileInput.addEventListener('change', function() {
                 handleFiles(this.files);
             });
@@ -285,16 +367,76 @@
                             currentImage = e.target.result;
                             previewContainer.style.display = 'block';
                             resultSection.style.display = 'none';
+                            verificationResult.style.display = 'none';
                         };
 
                         reader.readAsDataURL(file);
                     } else {
-                        alert('Te rugăm să selectezi o imagine.');
+                        alert('Please select an image file.');
                     }
                 }
             }
 
-            // Gestionare predict
+            // Function to create prediction chart
+            function createPredictionChart(predictions) {
+                // Destroy previous chart if it exists
+                if (predictionChart) {
+                    predictionChart.destroy();
+                }
+
+                const ctx = document.getElementById('prediction-chart').getContext('2d');
+
+                // Extract data for chart
+                const labels = predictions.map(p => p.class);
+                const confidences = predictions.map(p => p.confidence);
+
+                // Create color array with first prediction highlighted
+                const colors = predictions.map((_, index) =>
+                    index === 0 ? 'rgba(76, 175, 80, 0.8)' : 'rgba(3, 169, 244, 0.6)'
+                );
+
+                // Create chart
+                predictionChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Confidence (%)',
+                            data: confidences,
+                            backgroundColor: colors,
+                            borderColor: colors.map(c => c.replace('0.6', '1').replace('0.8', '1')),
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',  // Horizontal chart
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `Confidence: ${context.parsed.x.toFixed(2)}%`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                max: 100,
+                                title: {
+                                    display: true,
+                                    text: 'Confidence (%)'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Predict button handler
             predictBtn.addEventListener('click', async function() {
                 if (!currentImage) return;
 
@@ -314,12 +456,25 @@
                     const result = await response.json();
 
                     if (result.success) {
+                        // Save predictions for validation
+                        currentPredictions = result.predictions;
+
+                        // Display results
                         displayResults(result.predictions);
+
+                        // Create chart
+                        createPredictionChart(result.predictions);
+
+                        // Populate dropdown for verification
+                        populateFlowerDropdown(result.flower_classes || []);
+
+                        // Show verification section
+                        verificationSection.style.display = 'block';
                     } else {
-                        alert('Eroare la procesarea imaginii: ' + result.error);
+                        alert('Error processing image: ' + result.error);
                     }
                 } catch (error) {
-                    alert('Eroare la comunicarea cu serverul: ' + error.message);
+                    alert('Error communicating with server: ' + error.message);
                 } finally {
                     loading.style.display = 'none';
                     previewContainer.style.display = 'block';
@@ -327,16 +482,19 @@
                 }
             });
 
-            // Afișare rezultate
+            // Display results
             function displayResults(predictions) {
                 resultsContainer.innerHTML = '';
 
-                predictions.forEach(pred => {
+                predictions.forEach((pred, index) => {
                     const resultItem = document.createElement('div');
                     resultItem.className = 'result-item';
 
                     const flowerName = document.createElement('div');
                     flowerName.textContent = pred.class.charAt(0).toUpperCase() + pred.class.slice(1);
+                    if (index === 0) {
+                        flowerName.innerHTML += ' <strong>(Top prediction)</strong>';
+                    }
 
                     const confidenceContainer = document.createElement('div');
                     confidenceContainer.style.display = 'flex';
@@ -364,13 +522,22 @@
                 });
             }
 
-            // Reset
+            // Reset button handler
             resetBtn.addEventListener('click', function() {
                 previewContainer.style.display = 'none';
                 resultSection.style.display = 'none';
+                verificationSection.style.display = 'none';
+                verificationResult.style.display = 'none';
                 previewImage.src = '';
                 currentImage = null;
+                currentPredictions = null;
                 resultsContainer.innerHTML = '';
+
+                // Destroy chart if it exists
+                if (predictionChart) {
+                    predictionChart.destroy();
+                    predictionChart = null;
+                }
             });
         });
     </script>

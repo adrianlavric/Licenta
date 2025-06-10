@@ -1,0 +1,32 @@
+2025-06-10 20:36:37,927 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-10 20:36:37,927 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-10 20:36:37,927 - werkzeug - INFO -  * Restarting with stat
+2025-06-10 20:36:41,923 - werkzeug - WARNING -  * Debugger is active!
+2025-06-10 20:36:41,930 - werkzeug - INFO -  * Debugger PIN: 707-566-790
+2025-06-10 20:36:42,114 - werkzeug - INFO - 127.0.0.1 - - [10/Jun/2025 20:36:42] "GET / HTTP/1.1" 200 -
+2025-06-10 20:36:42,556 - werkzeug - INFO - 127.0.0.1 - - [10/Jun/2025 20:36:42] "GET /statistics HTTP/1.1" 200 -
+2025-06-10 20:37:35,506 - __main__ - INFO - predict executat în 1.69 secunde
+2025-06-10 20:37:35,507 - werkzeug - INFO - 127.0.0.1 - - [10/Jun/2025 20:37:35] "POST /predict HTTP/1.1" 200 -
+2025-06-10 20:37:46,099 - werkzeug - INFO - 127.0.0.1 - - [10/Jun/2025 20:37:46] "POST /feedback HTTP/1.1" 200 -
+2025-06-10 20:38:44,678 - werkzeug - INFO - 127.0.0.1 - - [10/Jun/2025 20:38:44] "GET / HTTP/1.1" 200 -
+2025-06-10 20:38:44,714 - werkzeug - INFO - 127.0.0.1 - - [10/Jun/2025 20:38:44] "GET /statistics HTTP/1.1" 200 -
+2025-06-10 20:39:22,545 - __main__ - INFO - predict executat în 0.15 secunde
+2025-06-10 20:39:22,545 - werkzeug - INFO - 127.0.0.1 - - [10/Jun/2025 20:39:22] "POST /predict HTTP/1.1" 200 -
+2025-06-10 20:39:22,696 - __main__ - INFO - predict executat în 0.13 secunde
+2025-06-10 20:39:22,696 - werkzeug - INFO - 127.0.0.1 - - [10/Jun/2025 20:39:22] "POST /predict HTTP/1.1" 200 -
+2025-06-10 20:39:23,045 - __main__ - INFO - predict executat în 0.16 secunde
+2025-06-10 20:39:23,045 - werkzeug - INFO - 127.0.0.1 - - [10/Jun/2025 20:39:23] "POST /predict HTTP/1.1" 200 -
+2025-06-10 20:39:54,371 - __main__ - INFO - predict executat în 0.42 secunde
+2025-06-10 20:39:54,371 - werkzeug - INFO - 127.0.0.1 - - [10/Jun/2025 20:39:54] "POST /predict HTTP/1.1" 200 -
+2025-06-10 20:40:02,048 - werkzeug - INFO - 127.0.0.1 - - [10/Jun/2025 20:40:02] "POST /feedback HTTP/1.1" 200 -
+2025-06-10 20:40:42,242 - __main__ - INFO - predict executat în 0.16 secunde
+2025-06-10 20:40:42,242 - werkzeug - INFO - 127.0.0.1 - - [10/Jun/2025 20:40:42] "POST /predict HTTP/1.1" 200 -
+2025-06-10 20:41:06,869 - __main__ - INFO - predict executat în 0.16 secunde
+2025-06-10 20:41:06,869 - werkzeug - INFO - 127.0.0.1 - - [10/Jun/2025 20:41:06] "POST /predict HTTP/1.1" 200 -
+2025-06-10 20:41:50,064 - __main__ - INFO - predict executat în 0.18 secunde
+2025-06-10 20:41:50,064 - werkzeug - INFO - 127.0.0.1 - - [10/Jun/2025 20:41:50] "POST /predict HTTP/1.1" 200 -
+2025-06-10 20:42:05,015 - __main__ - INFO - predict executat în 0.13 secunde
+2025-06-10 20:42:05,015 - werkzeug - INFO - 127.0.0.1 - - [10/Jun/2025 20:42:05] "POST /predict HTTP/1.1" 200 -
+2025-06-10 20:42:11,671 - __main__ - INFO - predict executat în 0.22 secunde
+2025-06-10 20:42:11,671 - werkzeug - INFO - 127.0.0.1 - - [10/Jun/2025 20:42:11] "POST /predict HTTP/1.1" 200 -

@@ -1,4 +1,8 @@
 from app import app, db, FlowerInfo
+import sqlite3
+import os
+from datetime import datetime
+from werkzeug.security import generate_password_hash
 
 FLOWER_DATA = {
     "pink primrose": {
@@ -921,160 +925,107 @@ FLOWER_DATA = {
     }
 }
 
-def populate_flower_database():
-    """Populează baza de date cu informații despre flori"""
+def setup_complete_database():
+    """Configurează complet baza de date"""
 
-    with app.app_context():
-        print("Începe popularea bazei de date cu informații despre flori...")
+    if os.path.exists('flower_predictions.db'):
+        os.remove('flower_predictions.db')
+        print("🗑️ Baza de date veche ștearsă")
 
-        db.create_all()
+    conn = sqlite3.connect('flower_predictions.db')
+    cursor = conn.cursor()
 
-        added_count = 0
-        for scientific_name, info in FLOWER_DATA.items():
-            existing_flower = FlowerInfo.query.filter_by(scientific_name=scientific_name).first()
+    print("Creez tabelele...")
 
-            if not existing_flower:
-                flower = FlowerInfo(
-                    scientific_name=scientific_name,
-                    common_name=info.get('common_name'),
-                    family=info.get('family'),
-                    origin=info.get('origin'),
-                    flowering_period=info.get('flowering_period'),
-                    colors=info.get('colors'),
-                    description=info.get('description'),
-                    care_instructions=info.get('care_instructions'),
-                    image_url=None  # Poate fi completat ulterior
-                )
+    cursor.execute('''
+        CREATE TABLE user (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username VARCHAR(80) UNIQUE NOT NULL,
+            email VARCHAR(120) UNIQUE NOT NULL,
+            password_hash VARCHAR(200) NOT NULL,
+            first_name VARCHAR(50),
+            last_name VARCHAR(50),
+            avatar_url VARCHAR(200),
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            last_login DATETIME,
+            is_active BOOLEAN DEFAULT 1,
+            role VARCHAR(20) DEFAULT 'user'
+        )
+    ''')
 
-                db.session.add(flower)
-                added_count += 1
-                print(f"Adăugat: {scientific_name}")
-            else:
-                print(f"Există deja: {scientific_name}")
+    cursor.execute('''
+        CREATE TABLE prediction (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER,
+            session_id VARCHAR(36) NOT NULL,
+            filename VARCHAR(255) NOT NULL,
+            predicted_class VARCHAR(100) NOT NULL,
+            confidence FLOAT NOT NULL,
+            all_predictions TEXT NOT NULL,
+            image_path VARCHAR(255),
+            processing_time FLOAT NOT NULL,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+            user_feedback VARCHAR(20),
+            FOREIGN KEY (user_id) REFERENCES user (id)
+        )
+    ''')
 
-        # Salvează modificările
-        try:
-            db.session.commit()
-            print(f"Popularea completă! Au fost adăugate {added_count} flori în baza de date.")
-        except Exception as e:
-            print(f"Eroare la salvarea în baza de date: {e}")
-            db.session.rollback()
+    cursor.execute('''
+        CREATE TABLE flower_info (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            scientific_name VARCHAR(100) UNIQUE NOT NULL,
+            common_name VARCHAR(100),
+            family VARCHAR(50),
+            origin VARCHAR(100),
+            flowering_period VARCHAR(50),
+            colors VARCHAR(100),
+            description TEXT,
+            care_instructions TEXT,
+            image_url VARCHAR(255)
+        )
+    ''')
 
+    print("Tabele create")
 
-def add_romanian_flowers():
-    """Adaugă flori specifice României"""
+    admin_password_hash = generate_password_hash('Admin123.')
+    cursor.execute('''
+        INSERT INTO user (username, email, password_hash, first_name, last_name, role, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    ''', ('admin', 'admin@flowerscan.com', admin_password_hash, 'Administrator', 'FlowerScan', 'admin', datetime.utcnow()))
 
-    romanian_flowers = {
-        "centaurea cyanus": {
-            "common_name": "Albăstrea",
-            "family": "Asteraceae",
-            "origin": "Europa",
-            "flowering_period": "Mai - Septembrie",
-            "colors": "Albastru",
-            "description": "Floarea națională a României, cu petale albastre caracteristice.",
-            "care_instructions": "Preferă sol bine drenat și expunere la soare."
-        },
-        "galanthus nivalis": {
-            "common_name": "Ghiocel",
-            "family": "Amaryllidaceae",
-            "origin": "Europa",
-            "flowering_period": "Februarie - Martie",
-            "colors": "Alb",
-            "description": "Prima floare a primăverii în România, cu petale albe delicate.",
-            "care_instructions": "Preferă sol umed și umbră parțială."
-        },
-        "leucojum vernum": {
-            "common_name": "Clopoței",
-            "family": "Amaryllidaceae",
-            "origin": "Europa",
-            "flowering_period": "Februarie - Aprilie",
-            "colors": "Alb cu puncte verzi",
-            "description": "Floare de primăvară specifică pădurilor românești.",
-            "care_instructions": "Preferă sol umed și umbră."
-        },
-        "crocus heuffelianus": {
-            "common_name": "Brândușă",
-            "family": "Iridaceae",
-            "origin": "România (endemic)",
-            "flowering_period": "Septembrie - Octombrie",
-            "colors": "Violet",
-            "description": "Specie endemică României, înflorește toamna.",
-            "care_instructions": "Preferă sol calcaros și expunere la soare."
-        }
-    }
+    print("Admin creat")
 
-    with app.app_context():
-        print("Adăugarea florilor românești...")
+    print("Adaug florile...")
+    for scientific_name, info in FLOWER_DATA.items():
+        cursor.execute('''
+            INSERT INTO flower_info 
+            (scientific_name, common_name, family, origin, flowering_period, 
+             colors, description, care_instructions)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (
+            scientific_name,
+            info.get('common_name'),
+            info.get('family'),
+            info.get('origin'),
+            info.get('flowering_period'),
+            info.get('colors'),
+            info.get('description'),
+            info.get('care_instructions')
+        ))
 
-        added_count = 0
-        for scientific_name, info in romanian_flowers.items():
-            existing_flower = FlowerInfo.query.filter_by(scientific_name=scientific_name).first()
+    conn.commit()
 
-            if not existing_flower:
-                flower = FlowerInfo(
-                    scientific_name=scientific_name,
-                    common_name=info.get('common_name'),
-                    family=info.get('family'),
-                    origin=info.get('origin'),
-                    flowering_period=info.get('flowering_period'),
-                    colors=info.get('colors'),
-                    description=info.get('description'),
-                    care_instructions=info.get('care_instructions'),
-                    image_url=None
-                )
+    cursor.execute("SELECT COUNT(*) FROM flower_info")
+    flower_count = cursor.fetchone()[0]
 
-                db.session.add(flower)
-                added_count += 1
-                print(f"Adăugat: {scientific_name} ({info['common_name']})")
-            else:
-                print(f"Există deja: {scientific_name}")
+    print(f"\nFINALIZAT!")
+    print(f"{flower_count} flori adăugate în baza de date")
+    print(f"Admin: username=admin, password=Admin123.")
 
-        try:
-            db.session.commit()
-            print(f"Au fost adăugate {added_count} flori românești în baza de date.")
-        except Exception as e:
-            print(f"Eroare la salvarea florilor românești: {e}")
-            db.session.rollback()
+    conn.close()
 
 
-def show_database_stats():
-    """Afișează statistici despre baza de date"""
-    with app.app_context():
-        total_flowers = FlowerInfo.query.count()
-        print(f"Total flori în baza de date: {total_flowers}")
-
-        if total_flowers > 0:
-            print("\nPrimele 5 flori din baza de date:")
-            flowers = FlowerInfo.query.limit(5).all()
-            for flower in flowers:
-                print(f"- {flower.scientific_name} ({flower.common_name})")
-
-
-if __name__ == '__main__':
-    import sys
-
-    if len(sys.argv) > 1:
-        command = sys.argv[1]
-
-        if command == 'populate':
-            populate_flower_database()
-        elif command == 'romanian':
-            add_romanian_flowers()
-        elif command == 'stats':
-            show_database_stats()
-        elif command == 'all':
-            populate_flower_database()
-            add_romanian_flowers()
-            show_database_stats()
-        else:
-            print("Comenzi disponibile:")
-            print("  python populate_db.py populate  - Populează baza de date")
-            print("  python populate_db.py romanian  - Adaugă flori românești")
-            print("  python populate_db.py stats     - Afișează statistici")
-            print("  python populate_db.py all       - Execută toate comenzile")
-    else:
-        print("Popularea automată a bazei de date...")
-        populate_flower_database()
-        add_romanian_flowers()
-        show_database_stats()
-        print("Toate florile au fost adăugate!")
+if __name__ == "__main__":
+    if os.path.exists('flower_predictions.db'):
+        os.remove('flower_predictions.db')
+    setup_complete_database()

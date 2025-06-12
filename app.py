@@ -19,13 +19,17 @@ import uuid
 from functools import wraps
 import time
 import re
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+import json
 
 app = Flask(__name__)
+
 app.config['SECRET_KEY'] = 'secret-key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flower_predictions.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'uploads'
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 db = SQLAlchemy(app)
 CORS(app)
@@ -88,20 +92,17 @@ class User(UserMixin, db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     last_login = db.Column(db.DateTime, nullable=True)
     is_active = db.Column(db.Boolean, default=True)
-    role = db.Column(db.String(20), default='user')  # 'user', 'admin'
+    role = db.Column(db.String(20), default='user')
 
     predictions = db.relationship('Prediction', backref='user', lazy=True, cascade='all, delete-orphan')
 
     def set_password(self, password):
-        """Setează parola criptată"""
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
-        """Verifică parola"""
         return check_password_hash(self.password_hash, password)
 
     def get_stats(self):
-        """Obține statistici pentru utilizator"""
         total_predictions = len(self.predictions)
         correct_feedback = len([p for p in self.predictions if p.user_feedback == 'correct'])
         incorrect_feedback = len([p for p in self.predictions if p.user_feedback == 'incorrect'])
@@ -111,11 +112,10 @@ class User(UserMixin, db.Model):
             'correct_predictions': correct_feedback,
             'incorrect_predictions': incorrect_feedback,
             'accuracy': (correct_feedback / (correct_feedback + incorrect_feedback) * 100) if (
-                                                                                                          correct_feedback + incorrect_feedback) > 0 else 0
+                                                                                                      correct_feedback + incorrect_feedback) > 0 else 0
         }
 
     def to_dict(self):
-        """Convertește obiectul User la dicționar"""
         return {
             'id': self.id,
             'username': self.username,
@@ -131,16 +131,16 @@ class User(UserMixin, db.Model):
 
 class Prediction(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)  # NULL pentru utilizatori neautentificați
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     session_id = db.Column(db.String(36), nullable=False)
     filename = db.Column(db.String(255), nullable=False)
     predicted_class = db.Column(db.String(100), nullable=False)
     confidence = db.Column(db.Float, nullable=False)
-    all_predictions = db.Column(db.Text, nullable=False)  # JSON string
+    all_predictions = db.Column(db.Text, nullable=False)
     image_path = db.Column(db.String(255), nullable=True)
     processing_time = db.Column(db.Float, nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
-    user_feedback = db.Column(db.String(20), nullable=True)  # 'correct', 'incorrect', None
+    user_feedback = db.Column(db.String(20), nullable=True)
 
 
 class FlowerInfo(db.Model):
@@ -162,13 +162,11 @@ def load_user(user_id):
 
 
 def validate_email(email):
-    """Validează formatul email-ului"""
     pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     return re.match(pattern, email) is not None
 
 
 def validate_password(password):
-    """Validează puterea parolei"""
     if len(password) < 8:
         return False, "Parola trebuie să aibă cel puțin 8 caractere"
     if not re.search(r'[A-Z]', password):
@@ -181,8 +179,6 @@ def validate_password(password):
 
 
 def timing_decorator(f):
-    """Decorator pentru măsurarea timpului de execuție"""
-
     @wraps(f)
     def wrapper(*args, **kwargs):
         start_time = time.time()
@@ -195,7 +191,6 @@ def timing_decorator(f):
 
 
 def preprocess_image(img_data):
-    """Preprocesează imaginea pentru predicție"""
     try:
         if ',' in img_data:
             img_data = img_data.split(',')[1]
@@ -209,7 +204,7 @@ def preprocess_image(img_data):
         img = img.resize(IMG_SIZE)
         img_array = image.img_to_array(img)
         img_array = np.expand_dims(img_array, axis=0)
-        img_array = img_array / 255.0  # Normalizare
+        img_array = img_array / 255.0
 
         return img_array
     except Exception as e:
@@ -218,7 +213,6 @@ def preprocess_image(img_data):
 
 
 def save_image(img_data, filename):
-    """Salvează imaginea pe disk"""
     try:
         if ',' in img_data:
             img_data = img_data.split(',')[1]
@@ -238,7 +232,6 @@ def save_image(img_data, filename):
 
 
 def get_flower_info(scientific_name):
-    """Obține informații despre o floare din baza de date"""
     flower = FlowerInfo.query.filter_by(scientific_name=scientific_name).first()
     if flower:
         return {
@@ -257,7 +250,6 @@ def get_flower_info(scientific_name):
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    """Înregistrare utilizator nou"""
     if request.method == 'GET':
         return render_template('auth/register.html')
 
@@ -312,7 +304,6 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    """Autentificare utilizator"""
     if request.method == 'GET':
         return render_template('auth/login.html')
 
@@ -356,7 +347,6 @@ def login():
 @app.route('/logout', methods=['POST'])
 @login_required
 def logout():
-    """Deautentificare utilizator"""
     username = current_user.username
     logout_user()
     logger.info(f"Utilizator deautentificat: {username}")
@@ -366,7 +356,6 @@ def logout():
 @app.route('/profile', methods=['GET', 'PUT'])
 @login_required
 def profile():
-    """Profil utilizator"""
     if request.method == 'GET':
         stats = current_user.get_stats()
         return jsonify({
@@ -375,7 +364,6 @@ def profile():
             'stats': stats
         })
 
-    # Actualizare profil
     try:
         data = request.json
 
@@ -403,7 +391,6 @@ def profile():
 @app.route('/change-password', methods=['POST'])
 @login_required
 def change_password():
-    """Schimbă parola utilizatorului"""
     try:
         data = request.json
         current_password = data.get('current_password', '')
@@ -429,14 +416,12 @@ def change_password():
 
 @app.route('/')
 def index():
-    """Pagina principală"""
     return render_template('index.html')
 
 
 @app.route('/predict', methods=['POST'])
 @timing_decorator
 def predict():
-    """Rută pentru procesarea predicțiilor - cu suport pentru utilizatori autentificați"""
     start_time = time.time()
 
     try:
@@ -479,6 +464,8 @@ def predict():
         logger.info(
             f"Predicție salvată: {top_predictions[0]['class']} ({top_predictions[0]['confidence']:.2f}%) - User: {current_user.username if current_user.is_authenticated else 'Anonim'}")
 
+        flower_info = get_flower_info(top_predictions[0]['class'])
+
         result = {
             'success': True,
             'predictions': top_predictions,
@@ -486,6 +473,9 @@ def predict():
             'processing_time': round(processing_time, 3),
             'prediction_id': prediction.id
         }
+
+        if flower_info:
+            result['flower_info'] = flower_info
 
         return jsonify(result)
 
@@ -496,9 +486,9 @@ def predict():
             'error': str(e)
         })
 
+
 @app.route('/flower-info/<scientific_name>')
 def flower_info(scientific_name):
-    """Obține informații despre o floare"""
     try:
         info = get_flower_info(scientific_name)
         if info:
@@ -518,11 +508,10 @@ def flower_info(scientific_name):
 
 @app.route('/feedback', methods=['POST'])
 def submit_feedback():
-    """Primește feedback de la utilizatori"""
     try:
         data = request.json
         prediction_id = data.get('prediction_id')
-        feedback = data.get('feedback')  # 'correct' sau 'incorrect'
+        feedback = data.get('feedback')
 
         if not prediction_id or feedback not in ['correct', 'incorrect']:
             return jsonify({
@@ -554,7 +543,6 @@ def submit_feedback():
 
 @app.route('/statistics')
 def get_statistics():
-    """Obține statistici despre utilizare"""
     try:
         total_predictions = Prediction.query.count()
         correct_feedback = Prediction.query.filter_by(user_feedback='correct').count()
@@ -598,7 +586,6 @@ def get_statistics():
 
 @app.route('/history/<session_id>')
 def get_history(session_id):
-    """Obține istoricul predicțiilor pentru o sesiune"""
     try:
         predictions = Prediction.query.filter_by(session_id=session_id) \
             .order_by(Prediction.timestamp.desc()) \
@@ -629,7 +616,6 @@ def get_history(session_id):
 
 @app.route('/health')
 def health_check():
-    """Health check pentru aplicație"""
     try:
         model_status = model is not None
 
@@ -660,7 +646,6 @@ def health_check():
 @app.route('/my-history')
 @login_required
 def my_history():
-    """Istoricul personal al utilizatorului autentificat"""
     try:
         predictions = Prediction.query.filter_by(user_id=current_user.id) \
             .order_by(Prediction.timestamp.desc()) \
@@ -706,19 +691,10 @@ def file_too_large(error):
 
 
 def init_db():
-    """Inițializează baza de date"""
     with app.app_context():
         db.create_all()
         logger.info("Baza de date inițializată")
 
-
-def init_db():
-    """Inițializează baza de date"""
-    with app.app_context():
-        db.create_all()
-        logger.info("Baza de date inițializată")
-
-        # Creează un admin implicit dacă nu există
         admin = User.query.filter_by(username='admin').first()
         if not admin:
             admin = User(

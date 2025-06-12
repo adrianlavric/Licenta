@@ -58,11 +58,11 @@ def setup_database():
 
     try:
         # Importă și rulează scriptul de populare
-        subprocess.run([sys.executable, "populate_db.py", "all"], check=True)
+        subprocess.run([sys.executable, "setup_database.py", "all"], check=True)
         print("Baza de date configurată cu succes")
     except subprocess.CalledProcessError:
         print("Eroare la configurarea bazei de date")
-        print("Încearcă să rulezi manual: python populate_db.py")
+        print("Încearcă să rulezi manual: python setup_database.py")
 
 
 def create_run_script():
@@ -107,7 +107,7 @@ def main():
 
     if not model_exists:
         print("1. ❗ Copiază modelul în models/model_flori_avansat.keras")
-        print("2. 🗄️  Rulează: python populate_db.py all")
+        print("2. 🗄️  Rulează: python setup_database.py all")
 
     print("3. 🚀 Pornește aplicația:")
     if os.name == 'nt':
@@ -119,7 +119,7 @@ def main():
 
     print("\n Fișiere importante:")
     print("   app.py - Aplicația principală")
-    print("   populate_db.py - Popularea bazei de date")
+    print("   setup_database.py - Popularea bazei de date")
     print("   requirements.txt - Dependințe Python")
     print("   templates/ - Template-uri HTML")
     print("   models/ - Modele de machine learning")
@@ -133,7 +133,7 @@ Comenzi disponibile:
 python setup.py              - Setup complet
 python setup.py --help       - Acest mesaj
 python app.py                - Rulează aplicația
-python populate_db.py all    - Populează baza de date
+python setup_database.py all    - Populează baza de date
         """)
     else:
         main()

@@ -87,28 +87,23 @@ python app.py"""
 
 def main():
     """Funcția principală de setup"""
-    print("🌸 === Setup FlowerAI - Aplicație de Recunoaștere Flori ===\n")
+    print("🌸 === Setup FlowerScan - Aplicație de Recunoaștere a Florilor ===\n")
 
-    # Verificări preliminare
     check_python_version()
 
-    # Creează directoare
     create_directories()
 
-    # Verifică modelul
     model_exists = check_model_files()
 
-    # Setup baza de date (doar dacă modelul există)
     if model_exists:
         setup_database()
     else:
         print("⚠️  Setup-ul bazei de date a fost omis din cauza modelului lipsă")
 
-    # Creează script de rulare
     create_run_script()
 
-    print("\n🎉 === Setup complet! ===")
-    print("\n📋 Pași următori:")
+    print("\n === Setup complet! ===")
+    print("\n Pași următori:")
 
     if not model_exists:
         print("1. ❗ Copiază modelul în models/model_flori_avansat.keras")
@@ -122,12 +117,12 @@ def main():
 
     print("4. 🌐 Deschide browser la: http://localhost:5000")
 
-    print("\n📚 Fișiere importante:")
-    print("   📄 app.py - Aplicația principală")
-    print("   📄 populate_db.py - Popularea bazei de date")
-    print("   📄 requirements.txt - Dependințe Python")
-    print("   📁 templates/ - Template-uri HTML")
-    print("   📁 models/ - Modele de machine learning")
+    print("\n Fișiere importante:")
+    print("   app.py - Aplicația principală")
+    print("   populate_db.py - Popularea bazei de date")
+    print("   requirements.txt - Dependințe Python")
+    print("   templates/ - Template-uri HTML")
+    print("   models/ - Modele de machine learning")
 
 
 if __name__ == "__main__":

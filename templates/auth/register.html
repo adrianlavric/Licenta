@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Înregistrare - FlowerScan</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #2E7D32;
+            --accent-color: #FF5722;
+            --background-light: #f8f9fa;
+            --text-light: #333;
+            --card-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .auth-container {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            padding: 3rem;
+            width: 100%;
+            max-width: 500px;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .logo h1 {
+            color: var(--text-light);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .input-container {
+            position: relative;
+        }
+
+        .input-container i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: white;
+        }
+
+        .password-strength {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .password-strength.weak {
+            background: #ffebee;
+            color: #c62828;
+            display: block;
+        }
+
+        .password-strength.medium {
+            background: #fff3e0;
+            color: #ef6c00;
+            display: block;
+        }
+
+        .password-strength.strong {
+            background: #e8f5e8;
+            color: var(--secondary-color);
+            display: block;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .auth-links {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .auth-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            border-left: 4px solid #c62828;
+            display: none;
+        }
+
+        .success-message {
+            background: #e8f5e8;
+            color: var(--secondary-color);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary-color);
+            display: none;
+        }
+
+        .loading {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .requirements {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .requirements h4 {
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .requirements ul {
+            margin-left: 1rem;
+            color: #666;
+        }
+
+        .requirements li {
+            margin-bottom: 0.2rem;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .auth-container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="logo">
+            <i class="fas fa-seedling"></i>
+            <h1>FlowerAI</h1>
+            <p>Creează un cont nou</p>
+        </div>
+
+        <div id="error-message" class="error-message"></div>
+        <div id="success-message" class="success-message"></div>
+
+        <form id="register-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="first_name">Prenume</label>
+                    <div class="input-container">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="first_name" name="first_name"
+                               placeholder="Prenumele tău">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="last_name">Nume</label>
+                    <div class="input-container">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="last_name" name="last_name"
+                               placeholder="Numele tău">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username *</label>
+                <div class="input-container">
+                    <i class="fas fa-at"></i>
+                    <input type="text" id="username" name="username" required
+                           placeholder="Alege un username unic">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <div class="input-container">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" name="email" required
+                           placeholder="adresa@email.com">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Parola *</label>
+                <div class="input-container">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" name="password" required
+                           placeholder="Alege o parolă sigură">
+                </div>
+                <div id="password-strength" class="password-strength"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm_password">Confirmă parola *</label>
+                <div class="input-container">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="confirm_password" name="confirm_password" required
+                           placeholder="Rescrie parola">
+                </div>
+            </div>
+
+            <div class="requirements">
+                <h4>Cerințe parolă:</h4>
+                <ul>
+                    <li>Cel puțin 8 caractere</li>
+                    <li>O literă mare</li>
+                    <li>O literă mică</li>
+                    <li>O cifră</li>
+                </ul>
+            </div>
+
+            <button type="submit" class="btn" id="register-btn">
+                <span id="register-text">Creează contul</span>
+                <div id="register-loading" class="loading">
+                    <div class="spinner"></div>
+                    <span>Se creează contul...</span>
+                </div>
+            </button>
+        </form>
+
+        <div class="auth-links">
+            <p>Ai deja cont? <a href="/login">Autentifică-te aici</a></p>
+            <p><a href="/">← Înapoi la aplicație</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Password strength checker
+        document.getElementById('password').addEventListener('input', function() {
+            const password = this.value;
+            const strengthDiv = document.getElementById('password-strength');
+
+            if (password.length === 0) {
+                strengthDiv.style.display = 'none';
+                return;
+            }
+
+            let score = 0;
+            let feedback = [];
+
+            if (password.length >= 8) score++;
+            else feedback.push('cel puțin 8 caractere');
+
+            if (/[A-Z]/.test(password)) score++;
+            else feedback.push('o literă mare');
+
+            if (/[a-z]/.test(password)) score++;
+            else feedback.push('o literă mică');
+
+            if (/\d/.test(password)) score++;
+            else feedback.push('o cifră');
+
+            if (score < 2) {
+                strengthDiv.className = 'password-strength weak';
+                strengthDiv.textContent = 'Parolă slabă. Adaugă: ' + feedback.join(', ');
+            } else if (score < 4) {
+                strengthDiv.className = 'password-strength medium';
+                strengthDiv.textContent = 'Parolă medie. Mai adaugă: ' + feedback.join(', ');
+            } else {
+                strengthDiv.className = 'password-strength strong';
+                strengthDiv.textContent = 'Parolă puternică!';
+            }
+        });
+
+        // Form submission
+        document.getElementById('register-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const registerBtn = document.getElementById('register-btn');
+            const registerText = document.getElementById('register-text');
+            const registerLoading = document.getElementById('register-loading');
+            const errorMessage = document.getElementById('error-message');
+            const successMessage = document.getElementById('success-message');
+
+            // Hide previous messages
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+
+            // Validate passwords match
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+
+            if (password !== confirmPassword) {
+                errorMessage.textContent = 'Parolele nu se potrivesc!';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            // Show loading state
+            registerText.style.display = 'none';
+            registerLoading.style.display = 'flex';
+            registerBtn.disabled = true;
+
+            const formData = {
+                username: document.getElementById('username').value,
+                email: document.getElementById('email').value,
+                password: password,
+                first_name: document.getElementById('first_name').value,
+                last_name: document.getElementById('last_name').value
+            };
+
+            try {
+                const response = await fetch('/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    successMessage.textContent = result.message;
+                    successMessage.style.display = 'block';
+
+                    // Clear form and redirect to login
+                    document.getElementById('register-form').reset();
+                    setTimeout(() => {
+                        window.location.href = '/login';
+                    }, 2000);
+                } else {
+                    errorMessage.textContent = result.error;
+                    errorMessage.style.display = 'block';
+                }
+
+            } catch (error) {
+                errorMessage.textContent = 'Eroare de conexiune. Te rog încearcă din nou.';
+                errorMessage.style.display = 'block';
+            } finally {
+                // Reset loading state
+                registerText.style.display = 'block';
+                registerLoading.style.display = 'none';
+                registerBtn.disabled = false;
+            }
+        });
+
+        // Auto-focus on first input
+        document.getElementById('first_name').focus();
+    </script>
+</body>
+</html>

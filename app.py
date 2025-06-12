@@ -1,6 +1,8 @@
-from flask import Flask, render_template, request, jsonify, send_file
+from flask import Flask, render_template, request, jsonify, send_file, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
 import numpy as np
 import os
 import tensorflow as tf
@@ -16,9 +18,10 @@ from werkzeug.utils import secure_filename
 import uuid
 from functools import wraps
 import time
+import re
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your-secret-key-here'
+app.config['SECRET_KEY'] = 'secret-key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flower_predictions.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'uploads'
@@ -26,6 +29,12 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 
 db = SQLAlchemy(app)
 CORS(app)
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+login_manager.login_message = 'Te rog să te autentifici pentru a accesa această pagină.'
+login_manager.login_message_category = 'info'
 
 logging.basicConfig(
     level=logging.INFO,
@@ -68,8 +77,61 @@ flower_classes = [
 ]
 
 
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password_hash = db.Column(db.String(200), nullable=False)
+    first_name = db.Column(db.String(50), nullable=True)
+    last_name = db.Column(db.String(50), nullable=True)
+    avatar_url = db.Column(db.String(200), nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    last_login = db.Column(db.DateTime, nullable=True)
+    is_active = db.Column(db.Boolean, default=True)
+    role = db.Column(db.String(20), default='user')  # 'user', 'admin'
+
+    predictions = db.relationship('Prediction', backref='user', lazy=True, cascade='all, delete-orphan')
+
+    def set_password(self, password):
+        """Setează parola criptată"""
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        """Verifică parola"""
+        return check_password_hash(self.password_hash, password)
+
+    def get_stats(self):
+        """Obține statistici pentru utilizator"""
+        total_predictions = len(self.predictions)
+        correct_feedback = len([p for p in self.predictions if p.user_feedback == 'correct'])
+        incorrect_feedback = len([p for p in self.predictions if p.user_feedback == 'incorrect'])
+
+        return {
+            'total_predictions': total_predictions,
+            'correct_predictions': correct_feedback,
+            'incorrect_predictions': incorrect_feedback,
+            'accuracy': (correct_feedback / (correct_feedback + incorrect_feedback) * 100) if (
+                                                                                                          correct_feedback + incorrect_feedback) > 0 else 0
+        }
+
+    def to_dict(self):
+        """Convertește obiectul User la dicționar"""
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'avatar_url': self.avatar_url,
+            'created_at': self.created_at.isoformat(),
+            'last_login': self.last_login.isoformat() if self.last_login else None,
+            'role': self.role
+        }
+
+
 class Prediction(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)  # NULL pentru utilizatori neautentificați
     session_id = db.Column(db.String(36), nullable=False)
     filename = db.Column(db.String(255), nullable=False)
     predicted_class = db.Column(db.String(100), nullable=False)
@@ -94,6 +156,30 @@ class FlowerInfo(db.Model):
     image_url = db.Column(db.String(255), nullable=True)
 
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+def validate_email(email):
+    """Validează formatul email-ului"""
+    pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    return re.match(pattern, email) is not None
+
+
+def validate_password(password):
+    """Validează puterea parolei"""
+    if len(password) < 8:
+        return False, "Parola trebuie să aibă cel puțin 8 caractere"
+    if not re.search(r'[A-Z]', password):
+        return False, "Parola trebuie să conțină cel puțin o literă mare"
+    if not re.search(r'[a-z]', password):
+        return False, "Parola trebuie să conțină cel puțin o literă mică"
+    if not re.search(r'\d', password):
+        return False, "Parola trebuie să conțină cel puțin o cifră"
+    return True, "Parolă validă"
+
+
 def timing_decorator(f):
     """Decorator pentru măsurarea timpului de execuție"""
 
@@ -109,7 +195,7 @@ def timing_decorator(f):
 
 
 def preprocess_image(img_data):
-    """Preproceseaza imaginea pentru predictie"""
+    """Preprocesează imaginea pentru predicție"""
     try:
         if ',' in img_data:
             img_data = img_data.split(',')[1]
@@ -138,7 +224,6 @@ def save_image(img_data, filename):
             img_data = img_data.split(',')[1]
 
         img_bytes = base64.b64decode(img_data)
-
         file_extension = os.path.splitext(filename)[1] or '.jpg'
         unique_filename = f"{uuid.uuid4()}{file_extension}"
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], unique_filename)
@@ -170,16 +255,188 @@ def get_flower_info(scientific_name):
     return None
 
 
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    """Înregistrare utilizator nou"""
+    if request.method == 'GET':
+        return render_template('auth/register.html')
+
+    try:
+        data = request.json
+        username = data.get('username', '').strip()
+        email = data.get('email', '').strip().lower()
+        password = data.get('password', '')
+        first_name = data.get('first_name', '').strip()
+        last_name = data.get('last_name', '').strip()
+
+        if not username or len(username) < 3:
+            return jsonify({'success': False, 'error': 'Username-ul trebuie să aibă cel puțin 3 caractere'}), 400
+
+        if not validate_email(email):
+            return jsonify({'success': False, 'error': 'Adresa de email nu este validă'}), 400
+
+        password_valid, password_message = validate_password(password)
+        if not password_valid:
+            return jsonify({'success': False, 'error': password_message}), 400
+
+        if User.query.filter_by(username=username).first():
+            return jsonify({'success': False, 'error': 'Username-ul este deja folosit'}), 400
+
+        if User.query.filter_by(email=email).first():
+            return jsonify({'success': False, 'error': 'Email-ul este deja folosit'}), 400
+
+        user = User(
+            username=username,
+            email=email,
+            first_name=first_name,
+            last_name=last_name
+        )
+        user.set_password(password)
+
+        db.session.add(user)
+        db.session.commit()
+
+        logger.info(f"Utilizator nou înregistrat: {username}")
+
+        return jsonify({
+            'success': True,
+            'message': 'Contul a fost creat cu succes! Te poți autentifica acum.',
+            'user': user.to_dict()
+        })
+
+    except Exception as e:
+        db.session.rollback()
+        logger.error(f"Eroare la înregistrare: {e}")
+        return jsonify({'success': False, 'error': 'Eroare la crearea contului'}), 500
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    """Autentificare utilizator"""
+    if request.method == 'GET':
+        return render_template('auth/login.html')
+
+    try:
+        data = request.json
+        username_or_email = data.get('username', '').strip()
+        password = data.get('password', '')
+        remember_me = data.get('remember_me', False)
+
+        if not username_or_email or not password:
+            return jsonify({'success': False, 'error': 'Username/email și parola sunt obligatorii'}), 400
+
+        user = User.query.filter(
+            (User.username == username_or_email) |
+            (User.email == username_or_email.lower())
+        ).first()
+
+        if not user or not user.check_password(password):
+            return jsonify({'success': False, 'error': 'Username/email sau parolă incorectă'}), 401
+
+        if not user.is_active:
+            return jsonify({'success': False, 'error': 'Contul este dezactivat'}), 401
+
+        login_user(user, remember=remember_me)
+        user.last_login = datetime.utcnow()
+        db.session.commit()
+
+        logger.info(f"Utilizator autentificat: {user.username}")
+
+        return jsonify({
+            'success': True,
+            'message': 'Autentificare reușită!',
+            'user': user.to_dict()
+        })
+
+    except Exception as e:
+        logger.error(f"Eroare la autentificare: {e}")
+        return jsonify({'success': False, 'error': 'Eroare la autentificare'}), 500
+
+
+@app.route('/logout', methods=['POST'])
+@login_required
+def logout():
+    """Deautentificare utilizator"""
+    username = current_user.username
+    logout_user()
+    logger.info(f"Utilizator deautentificat: {username}")
+    return jsonify({'success': True, 'message': 'Deautentificare reușită!'})
+
+
+@app.route('/profile', methods=['GET', 'PUT'])
+@login_required
+def profile():
+    """Profil utilizator"""
+    if request.method == 'GET':
+        stats = current_user.get_stats()
+        return jsonify({
+            'success': True,
+            'user': current_user.to_dict(),
+            'stats': stats
+        })
+
+    # Actualizare profil
+    try:
+        data = request.json
+
+        if 'first_name' in data:
+            current_user.first_name = data['first_name'].strip()
+        if 'last_name' in data:
+            current_user.last_name = data['last_name'].strip()
+        if 'avatar_url' in data:
+            current_user.avatar_url = data['avatar_url'].strip()
+
+        db.session.commit()
+
+        return jsonify({
+            'success': True,
+            'message': 'Profilul a fost actualizat cu succes!',
+            'user': current_user.to_dict()
+        })
+
+    except Exception as e:
+        db.session.rollback()
+        logger.error(f"Eroare la actualizarea profilului: {e}")
+        return jsonify({'success': False, 'error': 'Eroare la actualizarea profilului'}), 500
+
+
+@app.route('/change-password', methods=['POST'])
+@login_required
+def change_password():
+    """Schimbă parola utilizatorului"""
+    try:
+        data = request.json
+        current_password = data.get('current_password', '')
+        new_password = data.get('new_password', '')
+
+        if not current_user.check_password(current_password):
+            return jsonify({'success': False, 'error': 'Parola curentă este incorectă'}), 400
+
+        password_valid, password_message = validate_password(new_password)
+        if not password_valid:
+            return jsonify({'success': False, 'error': password_message}), 400
+
+        current_user.set_password(new_password)
+        db.session.commit()
+
+        return jsonify({'success': True, 'message': 'Parola a fost schimbată cu succes!'})
+
+    except Exception as e:
+        db.session.rollback()
+        logger.error(f"Eroare la schimbarea parolei: {e}")
+        return jsonify({'success': False, 'error': 'Eroare la schimbarea parolei'}), 500
+
+
 @app.route('/')
 def index():
-    """Ruta pentru pagina principala"""
+    """Pagina principală"""
     return render_template('index.html')
 
 
 @app.route('/predict', methods=['POST'])
 @timing_decorator
 def predict():
-    """Ruta pentru procesarea predictiilor - versiune îmbunătățită"""
+    """Rută pentru procesarea predicțiilor - cu suport pentru utilizatori autentificați"""
     start_time = time.time()
 
     try:
@@ -189,7 +446,6 @@ def predict():
         session_id = data.get('session_id', str(uuid.uuid4()))
 
         processed_image = preprocess_image(img_data)
-
         predictions = model.predict(processed_image)
 
         top_indices = predictions[0].argsort()[-5:][::-1]
@@ -204,10 +460,10 @@ def predict():
             })
 
         image_path = save_image(img_data, filename) if data.get('save_image', False) else None
-
         processing_time = time.time() - start_time
 
         prediction = Prediction(
+            user_id=current_user.id if current_user.is_authenticated else None,
             session_id=session_id,
             filename=secure_filename(filename),
             predicted_class=top_predictions[0]['class'],
@@ -220,7 +476,8 @@ def predict():
         db.session.add(prediction)
         db.session.commit()
 
-        logger.info(f"Predicție salvată: {top_predictions[0]['class']} ({top_predictions[0]['confidence']:.2f}%)")
+        logger.info(
+            f"Predicție salvată: {top_predictions[0]['class']} ({top_predictions[0]['confidence']:.2f}%) - User: {current_user.username if current_user.is_authenticated else 'Anonim'}")
 
         result = {
             'success': True,
@@ -238,7 +495,6 @@ def predict():
             'success': False,
             'error': str(e)
         })
-
 
 @app.route('/flower-info/<scientific_name>')
 def flower_info(scientific_name):
@@ -401,6 +657,38 @@ def health_check():
         }), 500
 
 
+@app.route('/my-history')
+@login_required
+def my_history():
+    """Istoricul personal al utilizatorului autentificat"""
+    try:
+        predictions = Prediction.query.filter_by(user_id=current_user.id) \
+            .order_by(Prediction.timestamp.desc()) \
+            .limit(50).all()
+
+        history = []
+        for pred in predictions:
+            history.append({
+                'id': pred.id,
+                'filename': pred.filename,
+                'predicted_class': pred.predicted_class,
+                'confidence': pred.confidence,
+                'all_predictions': json.loads(pred.all_predictions),
+                'timestamp': pred.timestamp.isoformat(),
+                'processing_time': pred.processing_time,
+                'user_feedback': pred.user_feedback
+            })
+
+        return jsonify({'success': True, 'data': history})
+
+    except Exception as e:
+        logger.error(f"Eroare la obținerea istoricului personal: {e}")
+        return jsonify({
+            'success': False,
+            'error': 'Eroare la obținerea istoricului'
+        }), 500
+
+
 @app.errorhandler(404)
 def not_found(error):
     return jsonify({'success': False, 'error': 'Resursa nu a fost găsită'}), 404
@@ -422,6 +710,28 @@ def init_db():
     with app.app_context():
         db.create_all()
         logger.info("Baza de date inițializată")
+
+
+def init_db():
+    """Inițializează baza de date"""
+    with app.app_context():
+        db.create_all()
+        logger.info("Baza de date inițializată")
+
+        # Creează un admin implicit dacă nu există
+        admin = User.query.filter_by(username='admin').first()
+        if not admin:
+            admin = User(
+                username='admin',
+                email='admin@flowerscan.com',
+                first_name='Administrator',
+                last_name='FlowerScan',
+                role='admin'
+            )
+            admin.set_password('Admin123.')
+            db.session.add(admin)
+            db.session.commit()
+            logger.info("Cont admin creat cu succes")
 
 
 if __name__ == '__main__':

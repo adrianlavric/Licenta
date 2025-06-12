@@ -71,6 +71,73 @@
             align-items: center;
         }
 
+        /* User Menu Styles */
+        .user-menu {
+            position: relative;
+            display: none; /* Hidden by default, shown when logged in */
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .user-avatar:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .user-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            min-width: 200px;
+            display: none;
+            margin-top: 0.5rem;
+            z-index: 1001;
+        }
+
+        .dark-mode .user-dropdown {
+            background: #2d2d2d;
+        }
+
+        .user-dropdown a {
+            display: block;
+            padding: 1rem;
+            color: var(--text-light);
+            text-decoration: none;
+            border-bottom: 1px solid #eee;
+            transition: background 0.3s ease;
+        }
+
+        .dark-mode .user-dropdown a {
+            color: var(--text-dark);
+            border-color: #555;
+        }
+
+        .user-dropdown a:hover {
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .user-dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
         .btn {
             padding: 0.6rem 1.2rem;
             border: none;
@@ -104,6 +171,22 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
+        }
+
+        /* Welcome Message */
+        .welcome-message {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            display: none;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .welcome-message.show {
+            display: flex;
         }
 
         .dashboard {
@@ -506,6 +589,39 @@
                 FlowerAI
             </div>
             <div class="nav-actions">
+                <!-- User Menu (shown when logged in) -->
+                <div class="user-menu" id="user-menu">
+                    <div class="user-avatar" onclick="toggleUserDropdown()">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-dropdown" id="user-dropdown">
+                        <a href="#" onclick="showProfile()">
+                            <i class="fas fa-user-circle"></i> Profilul meu
+                        </a>
+                        <a href="#" onclick="showMyHistory()">
+                            <i class="fas fa-history"></i> Istoricul meu
+                        </a>
+                        <a href="#" onclick="showSettings()">
+                            <i class="fas fa-cog"></i> Setări
+                        </a>
+                        <a href="#" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i> Deconectare
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Auth Buttons (shown when not logged in) -->
+                <div class="auth-buttons" id="auth-buttons">
+                    <a href="/login" class="btn btn-secondary">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Autentificare
+                    </a>
+                    <a href="/register" class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i>
+                        Înregistrare
+                    </a>
+                </div>
+
                 <button class="btn btn-secondary" onclick="toggleDarkMode()">
                     <i class="fas fa-moon"></i>
                     <span id="theme-text">Mod întunecat</span>
@@ -514,7 +630,7 @@
                     <i class="fas fa-download"></i>
                     Export
                 </button>
-                <button class="btn btn-primary" onclick="clearHistory()">
+                <button class="btn btn-primary" onclick="clearHistory()" id="clear-history-btn">
                     <i class="fas fa-trash"></i>
                     Șterge istoric
                 </button>
@@ -523,6 +639,12 @@
     </nav>
 
     <div class="container">
+        <!-- Welcome Message for logged in users -->
+        <div class="welcome-message" id="welcome-message">
+            <i class="fas fa-hand-wave"></i>
+            <span>Bun venit înapoi, <strong id="welcome-username"></strong>!</span>
+        </div>
+
         <!-- Dashboard Statistics -->
         <div class="dashboard">
             <div class="stat-card">
@@ -648,7 +770,7 @@
         <div class="history-section">
             <h2 class="section-title">
                 <i class="fas fa-history"></i>
-                Istoric predicții
+                <span id="history-title">Istoric predicții</span>
             </h2>
             <div id="history-container">
                 <p style="text-align: center; opacity: 0.7; margin: 2rem 0;">
@@ -670,6 +792,7 @@
     <div id="toast" class="toast"></div>
 
     <script>
+        // Global variables
         let currentStream = null;
         let predictionHistory = JSON.parse(localStorage.getItem('flowerPredictions')) || [];
         let sessionPredictions = 0;
@@ -678,14 +801,125 @@
         let currentPredictionId = null;
         let predictionChart = null;
         let sessionId = generateSessionId();
+        let currentUser = null;
+        let isAuthenticated = false;
 
         // Generate unique session ID
         function generateSessionId() {
             return 'session_' + Math.random().toString(36).substr(2, 9);
         }
 
+        // Check authentication status
+        async function checkAuthStatus() {
+            try {
+                const response = await fetch('/profile');
+                if (response.ok) {
+                    const result = await response.json();
+                    if (result.success) {
+                        currentUser = result.user;
+                        isAuthenticated = true;
+                        updateUIForAuthenticatedUser();
+                        loadUserHistory();
+                    }
+                }
+            } catch (error) {
+                console.log('User not authenticated');
+            }
+
+            if (!isAuthenticated) {
+                updateUIForAnonymousUser();
+            }
+        }
+
+        function updateUIForAuthenticatedUser() {
+            document.getElementById('user-menu').style.display = 'block';
+            document.getElementById('auth-buttons').style.display = 'none';
+
+            const welcomeMessage = document.getElementById('welcome-message');
+            const welcomeUsername = document.getElementById('welcome-username');
+
+            welcomeUsername.textContent = currentUser.first_name || currentUser.username;
+            welcomeMessage.classList.add('show');
+
+            document.getElementById('history-title').textContent = 'Istoricul meu personal';
+        }
+
+        function updateUIForAnonymousUser() {
+            document.getElementById('user-menu').style.display = 'none';
+            document.getElementById('auth-buttons').style.display = 'flex';
+            document.getElementById('welcome-message').classList.remove('show');
+        }
+
+        function toggleUserDropdown() {
+            const dropdown = document.getElementById('user-dropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const userMenu = document.getElementById('user-menu');
+            const dropdown = document.getElementById('user-dropdown');
+
+            if (!userMenu.contains(event.target)) {
+                dropdown.style.display = 'none';
+            }
+        });
+
+        async function logout() {
+            try {
+                const response = await fetch('/logout', {
+                    method: 'POST'
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    isAuthenticated = false;
+                    currentUser = null;
+                    updateUIForAnonymousUser();
+                    showToast('Deconectat cu succes!');
+
+                    // Clear personal history and reload page
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1500);
+                }
+            } catch (error) {
+                showToast('Eroare la deconectare!');
+            }
+        }
+
+        async function loadUserHistory() {
+            if (!isAuthenticated) return;
+
+            try {
+                const response = await fetch('/my-history');
+                const result = await response.json();
+
+                if (result.success) {
+                    predictionHistory = result.data;
+                    renderHistory();
+                    updateStats();
+                }
+            } catch (error) {
+                console.log('Eroare la încărcarea istoricului:', error);
+            }
+        }
+
+        function showProfile() {
+            showToast('Funcționalitate în dezvoltare!');
+        }
+
+        function showMyHistory() {
+            document.querySelector('.history-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showSettings() {
+            showToast('Funcționalitate în dezvoltare!');
+        }
+
         // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
+            checkAuthStatus();
             updateStats();
             renderHistory();
             loadStatistics();
@@ -827,23 +1061,27 @@
                     displayResults(result.predictions);
                     createPredictionChart(result.predictions);
 
-                    // Add to local history
-                    const prediction = {
-                        id: Date.now(),
-                        filename: 'uploaded_image.jpg',
-                        imageData: imageData,
-                        predictions: result.predictions,
-                        timestamp: new Date().toISOString(),
-                        processing_time: result.processing_time
-                    };
+                    if (isAuthenticated) {
+                        // Reload user history for authenticated users
+                        loadUserHistory();
+                    } else {
+                        // Add to local history for anonymous users
+                        const prediction = {
+                            id: Date.now(),
+                            filename: 'uploaded_image.jpg',
+                            imageData: imageData,
+                            predictions: result.predictions,
+                            timestamp: new Date().toISOString(),
+                            processing_time: result.processing_time
+                        };
 
-                    predictionHistory.unshift(prediction);
-                    localStorage.setItem('flowerPredictions', JSON.stringify(predictionHistory));
+                        predictionHistory.unshift(prediction);
+                        localStorage.setItem('flowerPredictions', JSON.stringify(predictionHistory));
+                        renderHistory();
+                    }
 
                     sessionPredictions++;
                     updateStats();
-                    renderHistory();
-
                     showResults();
                     showToast('Predicție completă!');
                 } else {
@@ -1072,13 +1310,22 @@
             predictionHistory.slice(0, 10).forEach(item => {
                 const historyItem = document.createElement('div');
                 historyItem.className = 'history-item';
+
+                // Handle different data structures (local vs server history)
+                const prediction = item.predictions ? item.predictions[0] : {
+                    class: item.predicted_class,
+                    confidence: item.confidence
+                };
+
+                const thumbnail = item.imageData || '/static/default-flower.png';
+
                 historyItem.innerHTML = `
-                    <img src="${item.imageData}" alt="Thumbnail" class="history-thumbnail">
+                    ${item.imageData ? `<img src="${item.imageData}" alt="Thumbnail" class="history-thumbnail">` : ''}
                     <div class="history-details">
-                        <div class="history-prediction">${item.predictions[0].class}</div>
+                        <div class="history-prediction">${prediction.class}</div>
                         <div class="history-time">${new Date(item.timestamp).toLocaleString('ro-RO')}</div>
                     </div>
-                    <div class="prediction-confidence">${item.predictions[0].confidence.toFixed(1)}%</div>
+                    <div class="prediction-confidence">${prediction.confidence.toFixed(1)}%</div>
                 `;
                 historyContainer.appendChild(historyItem);
             });
@@ -1094,6 +1341,11 @@
         }
 
         function clearHistory() {
+            if (isAuthenticated) {
+                showToast('Pentru utilizatori autentificați, istoricul se șterge din profilul personal.');
+                return;
+            }
+
             if (confirm('Ești sigur că vrei să ștergi istoricul?')) {
                 predictionHistory = [];
                 localStorage.removeItem('flowerPredictions');
@@ -1108,12 +1360,19 @@
                 return;
             }
 
-            const data = predictionHistory.map(item => ({
-                filename: item.filename,
-                prediction: item.predictions[0].class,
-                confidence: item.predictions[0].confidence,
-                timestamp: item.timestamp
-            }));
+            const data = predictionHistory.map(item => {
+                const prediction = item.predictions ? item.predictions[0] : {
+                    class: item.predicted_class,
+                    confidence: item.confidence
+                };
+
+                return {
+                    filename: item.filename || 'image',
+                    prediction: prediction.class,
+                    confidence: prediction.confidence,
+                    timestamp: item.timestamp
+                };
+            });
 
             const csv = convertToCSV(data);
             downloadCSV(csv, 'flower_predictions.csv');

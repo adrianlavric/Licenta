@@ -30,3 +30,74 @@
 2025-06-10 20:42:05,015 - werkzeug - INFO - 127.0.0.1 - - [10/Jun/2025 20:42:05] "POST /predict HTTP/1.1" 200 -
 2025-06-10 20:42:11,671 - __main__ - INFO - predict executat în 0.22 secunde
 2025-06-10 20:42:11,671 - werkzeug - INFO - 127.0.0.1 - - [10/Jun/2025 20:42:11] "POST /predict HTTP/1.1" 200 -
+2025-06-12 18:18:28,876 - __main__ - INFO - Cont admin creat cu succes
+2025-06-12 18:18:28,909 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-12 18:18:28,910 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-12 18:18:28,911 - werkzeug - INFO -  * Restarting with stat
+2025-06-12 18:18:33,522 - werkzeug - WARNING -  * Debugger is active!
+2025-06-12 18:18:33,537 - werkzeug - INFO -  * Debugger PIN: 707-566-790
+2025-06-12 18:18:33,665 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:18:33] "GET / HTTP/1.1" 200 -
+2025-06-12 18:18:33,972 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:18:33] "[32mGET /profile HTTP/1.1[0m" 302 -
+2025-06-12 18:18:34,028 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:18:34] "GET /login?next=/profile HTTP/1.1" 200 -
+2025-06-12 18:18:34,556 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:18:34] "[35m[1mGET /statistics HTTP/1.1[0m" 500 -
+2025-06-12 18:18:42,735 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:18:42] "GET /login HTTP/1.1" 200 -
+2025-06-12 18:19:06,155 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:19:06] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2025-06-12 18:19:12,843 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:19:12] "GET / HTTP/1.1" 200 -
+2025-06-12 18:19:12,885 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:19:12] "[32mGET /profile HTTP/1.1[0m" 302 -
+2025-06-12 18:19:12,897 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:19:12] "GET /login?next=/profile HTTP/1.1" 200 -
+2025-06-12 18:19:12,904 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:19:12] "[35m[1mGET /statistics HTTP/1.1[0m" 500 -
+2025-06-12 18:19:14,010 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:19:14] "GET /login HTTP/1.1" 200 -
+2025-06-12 18:19:15,943 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:19:15] "GET /register HTTP/1.1" 200 -
+2025-06-12 18:19:53,162 - __main__ - INFO - Utilizator nou înregistrat: adrian.lavric
+2025-06-12 18:19:53,171 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:19:53] "POST /register HTTP/1.1" 200 -
+2025-06-12 18:19:55,254 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:19:55] "GET /login HTTP/1.1" 200 -
+2025-06-12 18:19:58,901 - __main__ - INFO - Utilizator autentificat: adrian.lavric
+2025-06-12 18:19:58,901 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:19:58] "POST /login HTTP/1.1" 200 -
+2025-06-12 18:20:00,479 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:20:00] "GET / HTTP/1.1" 200 -
+2025-06-12 18:20:00,529 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:20:00] "[35m[1mGET /statistics HTTP/1.1[0m" 500 -
+2025-06-12 18:20:00,650 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:20:00] "[35m[1mGET /profile HTTP/1.1[0m" 500 -
+2025-06-12 18:20:38,844 - __main__ - INFO - predict executat în 3.02 secunde
+2025-06-12 18:20:38,844 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:20:38] "POST /predict HTTP/1.1" 200 -
+2025-06-12 18:20:48,733 - __main__ - INFO - predict executat în 0.25 secunde
+2025-06-12 18:20:48,733 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:20:48] "POST /predict HTTP/1.1" 200 -
+2025-06-12 18:21:37,046 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:21:37] "GET /login HTTP/1.1" 200 -
+2025-06-12 18:21:39,152 - __main__ - INFO - Utilizator autentificat: adrian.lavric
+2025-06-12 18:21:39,160 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:21:39] "POST /login HTTP/1.1" 200 -
+2025-06-12 18:21:40,723 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:21:40] "GET / HTTP/1.1" 200 -
+2025-06-12 18:21:40,790 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:21:40] "[35m[1mGET /statistics HTTP/1.1[0m" 500 -
+2025-06-12 18:21:40,814 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:21:40] "[35m[1mGET /profile HTTP/1.1[0m" 500 -
+2025-06-12 18:40:57,680 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-12 18:40:57,680 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-12 18:40:57,680 - werkzeug - INFO -  * Restarting with stat
+2025-06-12 18:41:02,117 - werkzeug - WARNING -  * Debugger is active!
+2025-06-12 18:41:02,125 - werkzeug - INFO -  * Debugger PIN: 707-566-790
+2025-06-12 18:41:02,264 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:41:02] "GET / HTTP/1.1" 200 -
+2025-06-12 18:41:02,798 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:41:02] "[35m[1mGET /statistics HTTP/1.1[0m" 500 -
+2025-06-12 18:41:02,824 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:41:02] "[35m[1mGET /profile HTTP/1.1[0m" 500 -
+2025-06-12 18:41:05,903 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:41:05] "GET /login HTTP/1.1" 200 -
+2025-06-12 18:41:08,414 - __main__ - INFO - Utilizator autentificat: adrian.lavric
+2025-06-12 18:41:08,422 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:41:08] "POST /login HTTP/1.1" 200 -
+2025-06-12 18:41:10,022 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:41:10] "GET / HTTP/1.1" 200 -
+2025-06-12 18:41:10,082 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:41:10] "[35m[1mGET /statistics HTTP/1.1[0m" 500 -
+2025-06-12 18:41:10,112 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:41:10] "[35m[1mGET /profile HTTP/1.1[0m" 500 -
+2025-06-12 18:41:17,898 - __main__ - INFO - predict executat în 2.64 secunde
+2025-06-12 18:41:17,898 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:41:17] "POST /predict HTTP/1.1" 200 -
+2025-06-12 18:46:07,924 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-12 18:46:07,924 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-12 18:46:07,924 - werkzeug - INFO -  * Restarting with stat
+2025-06-12 18:46:13,912 - werkzeug - WARNING -  * Debugger is active!
+2025-06-12 18:46:13,961 - werkzeug - INFO -  * Debugger PIN: 707-566-790
+2025-06-12 18:46:14,253 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:46:14] "GET / HTTP/1.1" 200 -
+2025-06-12 18:46:14,518 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:46:14] "[35m[1mGET /statistics HTTP/1.1[0m" 500 -
+2025-06-12 18:46:14,536 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:46:14] "[35m[1mGET /profile HTTP/1.1[0m" 500 -
+2025-06-12 18:46:16,363 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:46:16] "GET /login HTTP/1.1" 200 -
+2025-06-12 18:46:19,017 - __main__ - INFO - Utilizator autentificat: adrian.lavric
+2025-06-12 18:46:19,017 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:46:19] "POST /login HTTP/1.1" 200 -
+2025-06-12 18:46:20,548 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:46:20] "GET / HTTP/1.1" 200 -
+2025-06-12 18:46:20,637 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:46:20] "[35m[1mGET /statistics HTTP/1.1[0m" 500 -
+2025-06-12 18:46:20,654 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:46:20] "[35m[1mGET /profile HTTP/1.1[0m" 500 -
+2025-06-12 18:46:29,971 - __main__ - INFO - predict executat în 2.71 secunde
+2025-06-12 18:46:29,971 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 18:46:29] "POST /predict HTTP/1.1" 200 -

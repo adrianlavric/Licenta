@@ -927,12 +927,10 @@ def populate_flower_database():
     with app.app_context():
         print("Începe popularea bazei de date cu informații despre flori...")
 
-        # Creează tabelele dacă nu există
         db.create_all()
 
         added_count = 0
         for scientific_name, info in FLOWER_DATA.items():
-            # Verifică dacă floarea există deja
             existing_flower = FlowerInfo.query.filter_by(scientific_name=scientific_name).first()
 
             if not existing_flower:

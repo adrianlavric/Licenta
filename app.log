@@ -207,3 +207,445 @@
 2025-06-12 19:41:38,244 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 19:41:38] "[35m[1mGET /profile HTTP/1.1[0m" 500 -
 2025-06-12 19:41:53,960 - __main__ - INFO - predict executat în 1.82 secunde
 2025-06-12 19:41:53,961 - werkzeug - INFO - 127.0.0.1 - - [12/Jun/2025 19:41:53] "POST /predict HTTP/1.1" 200 -
+2025-06-13 17:39:16,419 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-13 17:39:16,419 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-13 17:39:16,426 - werkzeug - INFO -  * Restarting with stat
+2025-06-13 17:39:20,158 - werkzeug - WARNING -  * Debugger is active!
+2025-06-13 17:39:20,181 - werkzeug - INFO -  * Debugger PIN: 707-566-790
+2025-06-13 17:39:20,310 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:39:20] "GET / HTTP/1.1" 200 -
+2025-06-13 17:39:20,656 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:39:20] "[35m[1mGET /profile HTTP/1.1[0m" 500 -
+2025-06-13 17:39:20,824 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:39:20] "[35m[1mGET /statistics HTTP/1.1[0m" 500 -
+2025-06-13 17:39:35,491 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:39:35] "GET /login HTTP/1.1" 200 -
+2025-06-13 17:39:38,191 - __main__ - INFO - Utilizator autentificat: admin
+2025-06-13 17:39:38,193 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:39:38] "POST /login HTTP/1.1" 200 -
+2025-06-13 17:39:39,733 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:39:39] "GET / HTTP/1.1" 200 -
+2025-06-13 17:39:39,802 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:39:39] "[35m[1mGET /statistics HTTP/1.1[0m" 500 -
+2025-06-13 17:39:39,818 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:39:39] "[35m[1mGET /profile HTTP/1.1[0m" 500 -
+2025-06-13 17:39:48,990 - __main__ - INFO - predict executat în 2.89 secunde
+2025-06-13 17:39:48,992 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:39:48] "POST /predict HTTP/1.1" 200 -
+2025-06-13 17:42:09,916 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-13 17:42:09,916 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-13 17:42:09,916 - werkzeug - INFO -  * Restarting with stat
+2025-06-13 17:42:15,263 - werkzeug - WARNING -  * Debugger is active!
+2025-06-13 17:42:15,263 - werkzeug - INFO -  * Debugger PIN: 707-566-790
+2025-06-13 17:42:15,414 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:42:15] "GET / HTTP/1.1" 200 -
+2025-06-13 17:42:15,680 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:42:15] "[35m[1mGET /statistics HTTP/1.1[0m" 500 -
+2025-06-13 17:42:15,708 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:42:15] "[35m[1mGET /profile HTTP/1.1[0m" 500 -
+2025-06-13 17:42:16,532 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:42:16] "GET /login HTTP/1.1" 200 -
+2025-06-13 17:42:20,305 - __main__ - INFO - Utilizator autentificat: adrian.lavric
+2025-06-13 17:42:20,305 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:42:20] "POST /login HTTP/1.1" 200 -
+2025-06-13 17:42:21,830 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:42:21] "GET / HTTP/1.1" 200 -
+2025-06-13 17:42:21,895 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:42:21] "[35m[1mGET /statistics HTTP/1.1[0m" 500 -
+2025-06-13 17:42:21,911 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:42:21] "[35m[1mGET /profile HTTP/1.1[0m" 500 -
+2025-06-13 17:42:28,915 - __main__ - INFO - predict executat în 2.73 secunde
+2025-06-13 17:42:28,915 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:42:28] "POST /predict HTTP/1.1" 200 -
+2025-06-13 17:46:32,865 - __main__ - INFO - Cont admin creat cu succes
+2025-06-13 17:46:32,898 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-13 17:46:32,898 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-13 17:46:32,898 - werkzeug - INFO -  * Restarting with stat
+2025-06-13 17:46:37,427 - __main__ - INFO - Cont admin creat cu succes
+2025-06-13 17:46:37,443 - werkzeug - WARNING -  * Debugger is active!
+2025-06-13 17:46:37,446 - werkzeug - INFO -  * Debugger PIN: 707-566-790
+2025-06-13 17:46:56,522 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:46:56] "GET / HTTP/1.1" 200 -
+2025-06-13 17:46:56,774 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:46:56] "[32mGET /profile HTTP/1.1[0m" 302 -
+2025-06-13 17:46:56,794 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:46:56] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 17:46:56,805 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:46:56] "GET /login?next=/profile HTTP/1.1" 200 -
+2025-06-13 17:46:58,537 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:46:58] "GET /login HTTP/1.1" 200 -
+2025-06-13 17:47:00,066 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:47:00] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2025-06-13 17:47:04,018 - __main__ - INFO - Utilizator autentificat: admin
+2025-06-13 17:47:04,028 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:47:04] "POST /login HTTP/1.1" 200 -
+2025-06-13 17:47:05,603 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:47:05] "GET / HTTP/1.1" 200 -
+2025-06-13 17:47:05,639 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:47:05] "GET /profile HTTP/1.1" 200 -
+2025-06-13 17:47:05,639 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:47:05] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 17:47:05,658 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:47:05] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 17:47:12,068 - __main__ - INFO - predict executat în 2.64 secunde
+2025-06-13 17:47:12,068 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:47:12] "POST /predict HTTP/1.1" 200 -
+2025-06-13 17:47:12,146 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:47:12] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 17:47:19,689 - __main__ - INFO - predict executat în 0.32 secunde
+2025-06-13 17:47:19,689 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:47:19] "POST /predict HTTP/1.1" 200 -
+2025-06-13 17:47:19,705 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:47:19] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 17:47:27,743 - __main__ - INFO - predict executat în 0.33 secunde
+2025-06-13 17:47:27,743 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:47:27] "POST /predict HTTP/1.1" 200 -
+2025-06-13 17:47:27,762 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:47:27] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 17:47:36,719 - __main__ - INFO - predict executat în 0.30 secunde
+2025-06-13 17:47:36,720 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:47:36] "POST /predict HTTP/1.1" 200 -
+2025-06-13 17:47:36,723 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:47:36] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 17:48:19,661 - __main__ - INFO - predict executat în 0.54 secunde
+2025-06-13 17:48:19,669 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:48:19] "POST /predict HTTP/1.1" 200 -
+2025-06-13 17:48:19,688 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:48:19] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 17:48:28,633 - __main__ - INFO - predict executat în 0.42 secunde
+2025-06-13 17:48:28,643 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:48:28] "POST /predict HTTP/1.1" 200 -
+2025-06-13 17:48:28,653 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:48:28] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 17:49:27,604 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:49:27] "POST /feedback HTTP/1.1" 200 -
+2025-06-13 17:49:30,124 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:49:30] "GET / HTTP/1.1" 200 -
+2025-06-13 17:49:30,166 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:49:30] "GET /profile HTTP/1.1" 200 -
+2025-06-13 17:49:30,173 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:49:30] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 17:49:30,182 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:49:30] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 17:49:46,097 - __main__ - INFO - Utilizator deautentificat: admin
+2025-06-13 17:49:46,103 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:49:46] "POST /logout HTTP/1.1" 200 -
+2025-06-13 17:49:47,630 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:49:47] "GET / HTTP/1.1" 200 -
+2025-06-13 17:49:47,662 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:49:47] "[32mGET /profile HTTP/1.1[0m" 302 -
+2025-06-13 17:49:47,667 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:49:47] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 17:49:47,681 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:49:47] "GET /login?next=/profile HTTP/1.1" 200 -
+2025-06-13 17:49:47,845 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:49:47] "GET /login HTTP/1.1" 200 -
+2025-06-13 17:49:51,227 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:49:51] "GET /register HTTP/1.1" 200 -
+2025-06-13 17:50:23,627 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:50:23] "GET / HTTP/1.1" 200 -
+2025-06-13 17:50:23,712 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:50:23] "[32mGET /profile HTTP/1.1[0m" 302 -
+2025-06-13 17:50:23,730 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:50:23] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 17:50:23,732 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:50:23] "GET /login?next=/profile HTTP/1.1" 200 -
+2025-06-13 17:50:36,177 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:50:36] "GET /login HTTP/1.1" 200 -
+2025-06-13 17:50:38,590 - __main__ - INFO - Utilizator autentificat: admin
+2025-06-13 17:50:38,591 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:50:38] "POST /login HTTP/1.1" 200 -
+2025-06-13 17:50:40,110 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:50:40] "GET / HTTP/1.1" 200 -
+2025-06-13 17:50:40,154 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:50:40] "GET /profile HTTP/1.1" 200 -
+2025-06-13 17:50:40,173 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:50:40] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 17:50:40,406 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:50:40] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 17:50:40,555 - __main__ - INFO - Utilizator autentificat: admin
+2025-06-13 17:50:40,555 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:50:40] "POST /login HTTP/1.1" 200 -
+2025-06-13 17:58:15,111 - __main__ - INFO - Cont admin creat cu succes
+2025-06-13 17:58:15,175 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-13 17:58:15,175 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-13 17:58:15,175 - werkzeug - INFO -  * Restarting with stat
+2025-06-13 17:58:22,294 - __main__ - INFO - Cont admin creat cu succes
+2025-06-13 17:58:22,311 - werkzeug - WARNING -  * Debugger is active!
+2025-06-13 17:58:22,341 - werkzeug - INFO -  * Debugger PIN: 707-566-790
+2025-06-13 17:58:22,558 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:58:22] "GET / HTTP/1.1" 200 -
+2025-06-13 17:58:22,837 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:58:22] "GET /profile HTTP/1.1" 200 -
+2025-06-13 17:58:22,856 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:58:22] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 17:58:22,889 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:58:22] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 17:58:33,270 - __main__ - INFO - Utilizator deautentificat: admin
+2025-06-13 17:58:33,270 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:58:33] "POST /logout HTTP/1.1" 200 -
+2025-06-13 17:58:34,227 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:58:34] "GET /login HTTP/1.1" 200 -
+2025-06-13 17:58:36,234 - __main__ - INFO - Utilizator autentificat: admin
+2025-06-13 17:58:36,234 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:58:36] "POST /login HTTP/1.1" 200 -
+2025-06-13 17:58:37,764 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:58:37] "GET / HTTP/1.1" 200 -
+2025-06-13 17:58:37,840 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:58:37] "GET /profile HTTP/1.1" 200 -
+2025-06-13 17:58:37,848 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:58:37] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 17:58:37,867 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:58:37] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 17:58:48,391 - __main__ - INFO - Utilizator deautentificat: admin
+2025-06-13 17:58:48,391 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:58:48] "POST /logout HTTP/1.1" 200 -
+2025-06-13 17:58:49,960 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:58:49] "GET / HTTP/1.1" 200 -
+2025-06-13 17:58:49,992 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:58:49] "[32mGET /profile HTTP/1.1[0m" 302 -
+2025-06-13 17:58:50,002 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:58:50] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 17:58:50,002 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:58:50] "GET /login?next=/profile HTTP/1.1" 200 -
+2025-06-13 17:59:41,485 - __main__ - INFO - Cont admin creat cu succes
+2025-06-13 17:59:41,519 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-13 17:59:41,519 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-13 17:59:41,527 - werkzeug - INFO -  * Restarting with stat
+2025-06-13 17:59:47,372 - __main__ - INFO - Cont admin creat cu succes
+2025-06-13 17:59:47,381 - werkzeug - WARNING -  * Debugger is active!
+2025-06-13 17:59:47,389 - werkzeug - INFO -  * Debugger PIN: 707-566-790
+2025-06-13 17:59:47,542 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:59:47] "GET / HTTP/1.1" 200 -
+2025-06-13 17:59:47,899 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:59:47] "[32mGET /profile HTTP/1.1[0m" 302 -
+2025-06-13 17:59:47,919 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:59:47] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 17:59:47,946 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:59:47] "GET /login?next=/profile HTTP/1.1" 200 -
+2025-06-13 17:59:50,356 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:59:50] "GET /login HTTP/1.1" 200 -
+2025-06-13 17:59:53,200 - __main__ - INFO - Utilizator autentificat: admin
+2025-06-13 17:59:53,200 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:59:53] "POST /login HTTP/1.1" 200 -
+2025-06-13 17:59:54,744 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:59:54] "GET / HTTP/1.1" 200 -
+2025-06-13 17:59:54,791 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:59:54] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 17:59:54,800 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:59:54] "GET /profile HTTP/1.1" 200 -
+2025-06-13 17:59:54,875 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 17:59:54] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:00:09,238 - __main__ - INFO - Utilizator deautentificat: admin
+2025-06-13 18:00:09,239 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:00:09] "POST /logout HTTP/1.1" 200 -
+2025-06-13 18:00:11,809 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:00:11] "GET / HTTP/1.1" 200 -
+2025-06-13 18:00:11,830 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:00:11] "[32mGET /profile HTTP/1.1[0m" 302 -
+2025-06-13 18:00:11,848 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:00:11] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:00:11,855 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:00:11] "GET /login?next=/profile HTTP/1.1" 200 -
+2025-06-13 18:00:13,713 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:00:13] "GET /login HTTP/1.1" 200 -
+2025-06-13 18:00:15,976 - __main__ - INFO - Utilizator autentificat: admin
+2025-06-13 18:00:15,976 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:00:15] "POST /login HTTP/1.1" 200 -
+2025-06-13 18:00:17,510 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:00:17] "GET / HTTP/1.1" 200 -
+2025-06-13 18:00:17,576 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:00:17] "GET /profile HTTP/1.1" 200 -
+2025-06-13 18:00:17,586 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:00:17] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:00:17,597 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:00:17] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:05:26,780 - __main__ - INFO - Cont admin creat cu succes
+2025-06-13 18:05:26,827 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-13 18:05:26,827 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-13 18:05:26,827 - werkzeug - INFO -  * Restarting with stat
+2025-06-13 18:05:33,347 - __main__ - INFO - Cont admin creat cu succes
+2025-06-13 18:05:33,371 - werkzeug - WARNING -  * Debugger is active!
+2025-06-13 18:05:33,379 - werkzeug - INFO -  * Debugger PIN: 707-566-790
+2025-06-13 18:05:33,563 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:05:33] "GET / HTTP/1.1" 200 -
+2025-06-13 18:05:33,744 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:05:33] "GET /profile HTTP/1.1" 200 -
+2025-06-13 18:05:33,744 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:05:33] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:05:33,834 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:05:33] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:05:36,235 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:05:36] "GET /profile-page HTTP/1.1" 200 -
+2025-06-13 18:05:36,545 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:05:36] "GET /profile HTTP/1.1" 200 -
+2025-06-13 18:05:36,545 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:05:36] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:05:52,125 - __main__ - INFO - Utilizator deautentificat: admin
+2025-06-13 18:05:52,128 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:05:52] "POST /logout HTTP/1.1" 200 -
+2025-06-13 18:05:53,101 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:05:53] "GET /login HTTP/1.1" 200 -
+2025-06-13 18:05:58,716 - __main__ - INFO - Utilizator autentificat: admin
+2025-06-13 18:05:58,716 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:05:58] "POST /login HTTP/1.1" 200 -
+2025-06-13 18:06:00,303 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:06:00] "GET / HTTP/1.1" 200 -
+2025-06-13 18:06:00,354 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:06:00] "GET /profile HTTP/1.1" 200 -
+2025-06-13 18:06:00,360 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:06:00] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:06:00,378 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:06:00] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:06:05,327 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:06:05] "GET /profile-page HTTP/1.1" 200 -
+2025-06-13 18:06:05,423 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:06:05] "GET /profile HTTP/1.1" 200 -
+2025-06-13 18:06:05,431 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:06:05] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:14:07,887 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:07] "GET /profile-page HTTP/1.1" 200 -
+2025-06-13 18:14:07,979 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:07] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:14:07,979 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:07] "GET /profile HTTP/1.1" 200 -
+2025-06-13 18:14:11,174 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:11] "GET /profile-page HTTP/1.1" 200 -
+2025-06-13 18:14:11,225 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:11] "GET /profile HTTP/1.1" 200 -
+2025-06-13 18:14:11,227 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:11] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:14:13,273 - __main__ - INFO - Utilizator deautentificat: admin
+2025-06-13 18:14:13,281 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:13] "POST /logout HTTP/1.1" 200 -
+2025-06-13 18:14:14,853 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:14] "GET / HTTP/1.1" 200 -
+2025-06-13 18:14:14,909 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:14] "[32mGET /profile HTTP/1.1[0m" 302 -
+2025-06-13 18:14:14,918 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:14] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:14:14,945 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:14] "GET /login?next=/profile HTTP/1.1" 200 -
+2025-06-13 18:14:15,977 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:15] "GET /register HTTP/1.1" 200 -
+2025-06-13 18:14:21,611 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:21] "GET / HTTP/1.1" 200 -
+2025-06-13 18:14:21,661 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:21] "[32mGET /profile HTTP/1.1[0m" 302 -
+2025-06-13 18:14:21,672 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:21] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:14:21,693 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:21] "GET /login?next=/profile HTTP/1.1" 200 -
+2025-06-13 18:14:30,450 - __main__ - INFO - predict executat în 3.27 secunde
+2025-06-13 18:14:30,456 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:30] "POST /predict HTTP/1.1" 200 -
+2025-06-13 18:14:33,600 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:33] "POST /feedback HTTP/1.1" 200 -
+2025-06-13 18:14:36,488 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:36] "GET /login HTTP/1.1" 200 -
+2025-06-13 18:14:38,700 - __main__ - INFO - Utilizator autentificat: admin
+2025-06-13 18:14:38,702 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:38] "POST /login HTTP/1.1" 200 -
+2025-06-13 18:14:40,275 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:40] "GET / HTTP/1.1" 200 -
+2025-06-13 18:14:40,316 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:40] "GET /profile HTTP/1.1" 200 -
+2025-06-13 18:14:40,349 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:40] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:14:40,377 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:40] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:14:45,697 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:45] "GET /profile-page HTTP/1.1" 200 -
+2025-06-13 18:14:45,745 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:45] "GET /profile HTTP/1.1" 200 -
+2025-06-13 18:14:45,751 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:14:45] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:24:53,716 - __main__ - INFO - Cont admin creat cu succes
+2025-06-13 18:24:53,764 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-13 18:24:53,764 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-13 18:24:53,764 - werkzeug - INFO -  * Restarting with stat
+2025-06-13 18:25:00,332 - __main__ - INFO - Cont admin creat cu succes
+2025-06-13 18:25:00,347 - werkzeug - WARNING -  * Debugger is active!
+2025-06-13 18:25:00,364 - werkzeug - INFO -  * Debugger PIN: 707-566-790
+2025-06-13 18:25:00,567 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:25:00] "GET / HTTP/1.1" 200 -
+2025-06-13 18:25:00,803 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:25:00] "GET /profile HTTP/1.1" 200 -
+2025-06-13 18:25:00,848 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:25:00] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:25:13,893 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:25:13] "GET /login HTTP/1.1" 200 -
+2025-06-13 18:25:16,688 - __main__ - INFO - Utilizator autentificat: admin
+2025-06-13 18:25:16,688 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:25:16] "POST /login HTTP/1.1" 200 -
+2025-06-13 18:25:18,220 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:25:18] "GET / HTTP/1.1" 200 -
+2025-06-13 18:25:18,280 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:25:18] "GET /profile HTTP/1.1" 200 -
+2025-06-13 18:25:18,296 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:25:18] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:25:22,980 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:25:22] "GET /login HTTP/1.1" 200 -
+2025-06-13 18:25:24,988 - __main__ - INFO - Utilizator autentificat: admin
+2025-06-13 18:25:24,988 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:25:24] "POST /login HTTP/1.1" 200 -
+2025-06-13 18:25:26,527 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:25:26] "GET / HTTP/1.1" 200 -
+2025-06-13 18:25:26,621 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:25:26] "GET /profile HTTP/1.1" 200 -
+2025-06-13 18:25:26,640 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:25:26] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:25:32,067 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:25:32] "GET /login HTTP/1.1" 200 -
+2025-06-13 18:25:38,489 - __main__ - INFO - Utilizator autentificat: admin
+2025-06-13 18:25:38,489 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:25:38] "POST /login HTTP/1.1" 200 -
+2025-06-13 18:25:40,018 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:25:40] "GET / HTTP/1.1" 200 -
+2025-06-13 18:25:40,052 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:25:40] "GET /profile HTTP/1.1" 200 -
+2025-06-13 18:25:40,070 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:25:40] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:26:12,926 - __main__ - INFO - predict executat în 2.09 secunde
+2025-06-13 18:26:12,929 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:26:12] "POST /predict HTTP/1.1" 200 -
+2025-06-13 18:26:16,547 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:26:16] "POST /feedback HTTP/1.1" 200 -
+2025-06-13 18:26:20,767 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:26:20] "GET /login HTTP/1.1" 200 -
+2025-06-13 18:26:23,871 - __main__ - INFO - Utilizator autentificat: admin
+2025-06-13 18:26:23,871 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:26:23] "POST /login HTTP/1.1" 200 -
+2025-06-13 18:26:25,390 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:26:25] "GET / HTTP/1.1" 200 -
+2025-06-13 18:26:25,491 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:26:25] "GET /profile HTTP/1.1" 200 -
+2025-06-13 18:26:25,506 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:26:25] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:34:14,563 - __main__ - INFO - Cont admin creat cu succes
+2025-06-13 18:34:14,610 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-13 18:34:14,610 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-13 18:34:14,610 - werkzeug - INFO -  * Restarting with stat
+2025-06-13 18:34:21,166 - __main__ - INFO - Cont admin creat cu succes
+2025-06-13 18:34:21,188 - werkzeug - WARNING -  * Debugger is active!
+2025-06-13 18:34:21,198 - werkzeug - INFO -  * Debugger PIN: 707-566-790
+2025-06-13 18:34:21,388 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:21] "GET / HTTP/1.1" 200 -
+2025-06-13 18:34:21,589 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:21] "GET /profile-api HTTP/1.1" 200 -
+2025-06-13 18:34:21,637 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:21] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:34:21,659 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:21] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:34:25,080 - __main__ - INFO - Utilizator deautentificat: admin
+2025-06-13 18:34:25,087 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:25] "POST /logout HTTP/1.1" 200 -
+2025-06-13 18:34:26,647 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:26] "GET /login HTTP/1.1" 200 -
+2025-06-13 18:34:26,661 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:26] "GET / HTTP/1.1" 200 -
+2025-06-13 18:34:26,694 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:26] "[32mGET /profile-api HTTP/1.1[0m" 302 -
+2025-06-13 18:34:26,710 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:26] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:34:26,731 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:26] "GET /login?next=/profile-api HTTP/1.1" 200 -
+2025-06-13 18:34:33,170 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:33] "GET /login HTTP/1.1" 200 -
+2025-06-13 18:34:35,727 - __main__ - INFO - Utilizator autentificat: admin
+2025-06-13 18:34:35,730 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:35] "POST /login HTTP/1.1" 200 -
+2025-06-13 18:34:37,265 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:37] "GET / HTTP/1.1" 200 -
+2025-06-13 18:34:37,336 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:37] "GET /profile-api HTTP/1.1" 200 -
+2025-06-13 18:34:37,359 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:37] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:34:37,375 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:37] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:34:46,013 - __main__ - INFO - Utilizator deautentificat: admin
+2025-06-13 18:34:46,017 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:46] "POST /logout HTTP/1.1" 200 -
+2025-06-13 18:34:46,984 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:46] "GET /register HTTP/1.1" 200 -
+2025-06-13 18:34:52,065 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:52] "GET /login HTTP/1.1" 200 -
+2025-06-13 18:34:54,313 - __main__ - INFO - Utilizator autentificat: admin
+2025-06-13 18:34:54,313 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:54] "POST /login HTTP/1.1" 200 -
+2025-06-13 18:34:55,840 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:55] "GET / HTTP/1.1" 200 -
+2025-06-13 18:34:55,888 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:55] "GET /profile-api HTTP/1.1" 200 -
+2025-06-13 18:34:55,906 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:55] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:34:55,921 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:55] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:34:57,643 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:57] "GET /profile HTTP/1.1" 200 -
+2025-06-13 18:34:57,740 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:57] "GET /profile-api HTTP/1.1" 200 -
+2025-06-13 18:34:57,750 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:34:57] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:39:35,557 - __main__ - INFO - Cont admin creat cu succes
+2025-06-13 18:39:35,587 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-13 18:39:35,587 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-13 18:39:35,589 - werkzeug - INFO -  * Restarting with stat
+2025-06-13 18:39:41,232 - __main__ - INFO - Cont admin creat cu succes
+2025-06-13 18:39:41,242 - werkzeug - WARNING -  * Debugger is active!
+2025-06-13 18:39:41,251 - werkzeug - INFO -  * Debugger PIN: 707-566-790
+2025-06-13 18:39:41,430 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:39:41] "GET / HTTP/1.1" 200 -
+2025-06-13 18:39:41,662 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:39:41] "GET /profile-api HTTP/1.1" 200 -
+2025-06-13 18:39:41,707 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:39:41] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:39:41,757 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:39:41] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:39:46,087 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:39:46] "GET /profile HTTP/1.1" 200 -
+2025-06-13 18:39:46,183 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:39:46] "GET /profile-api HTTP/1.1" 200 -
+2025-06-13 18:39:46,186 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:39:46] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:40:05,876 - __main__ - INFO - predict executat în 1.84 secunde
+2025-06-13 18:40:05,877 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:40:05] "POST /predict HTTP/1.1" 200 -
+2025-06-13 18:40:05,923 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:40:05] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:40:10,391 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:40:10] "POST /feedback HTTP/1.1" 200 -
+2025-06-13 18:40:11,933 - __main__ - INFO - Utilizator deautentificat: admin
+2025-06-13 18:40:11,934 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:40:11] "POST /logout HTTP/1.1" 200 -
+2025-06-13 18:40:12,730 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:40:12] "GET /login HTTP/1.1" 200 -
+2025-06-13 18:40:15,074 - __main__ - INFO - Utilizator autentificat: admin
+2025-06-13 18:40:15,077 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:40:15] "POST /login HTTP/1.1" 200 -
+2025-06-13 18:40:16,607 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:40:16] "GET / HTTP/1.1" 200 -
+2025-06-13 18:40:16,647 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:40:16] "GET /profile-api HTTP/1.1" 200 -
+2025-06-13 18:40:16,657 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:40:16] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:40:16,676 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:40:16] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:40:19,782 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:40:19] "GET /profile HTTP/1.1" 200 -
+2025-06-13 18:40:19,814 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:40:19] "GET /profile-api HTTP/1.1" 200 -
+2025-06-13 18:40:19,815 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:40:19] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:41:06,295 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:41:06] "GET /profile-api HTTP/1.1" 200 -
+2025-06-13 18:43:56,985 - __main__ - INFO - Cont admin creat cu succes
+2025-06-13 18:43:57,008 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-13 18:43:57,008 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-13 18:43:57,010 - werkzeug - INFO -  * Restarting with stat
+2025-06-13 18:44:01,154 - __main__ - INFO - Cont admin creat cu succes
+2025-06-13 18:44:01,160 - werkzeug - WARNING -  * Debugger is active!
+2025-06-13 18:44:01,166 - werkzeug - INFO -  * Debugger PIN: 707-566-790
+2025-06-13 18:44:01,289 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:44:01] "GET / HTTP/1.1" 200 -
+2025-06-13 18:44:01,525 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:44:01] "GET /profile-api HTTP/1.1" 200 -
+2025-06-13 18:44:01,582 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:44:01] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:44:01,650 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:44:01] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:44:04,853 - __main__ - INFO - Utilizator deautentificat: admin
+2025-06-13 18:44:04,854 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:44:04] "POST /logout HTTP/1.1" 200 -
+2025-06-13 18:44:06,386 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:44:06] "GET / HTTP/1.1" 200 -
+2025-06-13 18:44:06,418 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:44:06] "[32mGET /profile-api HTTP/1.1[0m" 302 -
+2025-06-13 18:44:06,435 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:44:06] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:44:06,441 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:44:06] "GET /login?next=/profile-api HTTP/1.1" 200 -
+2025-06-13 18:44:07,355 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:44:07] "GET /login HTTP/1.1" 200 -
+2025-06-13 18:44:09,278 - __main__ - INFO - Utilizator autentificat: admin
+2025-06-13 18:44:09,279 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:44:09] "POST /login HTTP/1.1" 200 -
+2025-06-13 18:44:10,796 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:44:10] "GET / HTTP/1.1" 200 -
+2025-06-13 18:44:10,827 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:44:10] "GET /profile-api HTTP/1.1" 200 -
+2025-06-13 18:44:10,835 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:44:10] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:44:10,846 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:44:10] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:44:12,211 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:44:12] "GET /profile HTTP/1.1" 200 -
+2025-06-13 18:44:12,305 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:44:12] "GET /profile-api HTTP/1.1" 200 -
+2025-06-13 18:44:12,309 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:44:12] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:44:27,221 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:44:27] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-13 18:46:05,582 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:46:05] "[32mGET /profile-api HTTP/1.1[0m" 302 -
+2025-06-13 18:46:05,590 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:46:05] "GET /login?next=/profile-api HTTP/1.1" 200 -
+2025-06-13 18:46:06,072 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:46:06] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-13 18:46:18,606 - __main__ - INFO - Utilizator autentificat: admin
+2025-06-13 18:46:18,607 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:46:18] "POST /login HTTP/1.1" 200 -
+2025-06-13 18:46:20,126 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:46:20] "GET / HTTP/1.1" 200 -
+2025-06-13 18:46:20,430 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:46:20] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:46:20,647 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:46:20] "GET /profile-api HTTP/1.1" 200 -
+2025-06-13 18:46:20,964 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:46:20] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:46:23,005 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:46:23] "GET /profile HTTP/1.1" 200 -
+2025-06-13 18:46:23,322 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:46:23] "GET /profile-api HTTP/1.1" 200 -
+2025-06-13 18:46:23,326 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:46:23] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:46:29,933 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:46:29] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-13 18:46:29,954 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:46:29] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-13 18:50:33,477 - __main__ - INFO - Cont admin creat cu succes
+2025-06-13 18:50:33,494 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-13 18:50:33,494 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-13 18:50:33,496 - werkzeug - INFO -  * Restarting with stat
+2025-06-13 18:50:37,335 - __main__ - INFO - Cont admin creat cu succes
+2025-06-13 18:50:37,344 - werkzeug - WARNING -  * Debugger is active!
+2025-06-13 18:50:37,346 - werkzeug - INFO -  * Debugger PIN: 707-566-790
+2025-06-13 18:50:40,754 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:50:40] "GET / HTTP/1.1" 200 -
+2025-06-13 18:50:40,955 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:50:40] "GET /profile-api HTTP/1.1" 200 -
+2025-06-13 18:50:41,007 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:50:41] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:50:41,054 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:50:41] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:50:52,670 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:50:52] "GET /profile HTTP/1.1" 200 -
+2025-06-13 18:50:52,759 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:50:52] "GET /profile-api HTTP/1.1" 200 -
+2025-06-13 18:50:52,764 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:50:52] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:51:06,941 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:51:06] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-06-13 18:53:23,959 - __main__ - INFO - Cont admin creat cu succes
+2025-06-13 18:53:23,978 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-13 18:53:23,979 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-13 18:53:23,982 - werkzeug - INFO -  * Restarting with stat
+2025-06-13 18:53:27,901 - __main__ - INFO - Cont admin creat cu succes
+2025-06-13 18:53:27,908 - werkzeug - WARNING -  * Debugger is active!
+2025-06-13 18:53:27,911 - werkzeug - INFO -  * Debugger PIN: 707-566-790
+2025-06-13 18:53:28,025 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:53:28] "GET / HTTP/1.1" 200 -
+2025-06-13 18:53:28,131 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:53:28] "GET /profile-api HTTP/1.1" 200 -
+2025-06-13 18:53:28,155 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:53:28] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:53:28,178 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:53:28] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:53:41,171 - __main__ - INFO - Utilizator deautentificat: admin
+2025-06-13 18:53:41,173 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:53:41] "POST /logout HTTP/1.1" 200 -
+2025-06-13 18:53:41,948 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:53:41] "GET /login HTTP/1.1" 200 -
+2025-06-13 18:53:43,921 - __main__ - INFO - Utilizator autentificat: admin
+2025-06-13 18:53:43,922 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:53:43] "POST /login HTTP/1.1" 200 -
+2025-06-13 18:53:45,438 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:53:45] "GET / HTTP/1.1" 200 -
+2025-06-13 18:53:45,466 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:53:45] "GET /profile-api HTTP/1.1" 200 -
+2025-06-13 18:53:45,474 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:53:45] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:53:45,483 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:53:45] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:53:47,221 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:53:47] "GET /profile HTTP/1.1" 200 -
+2025-06-13 18:53:47,295 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:53:47] "GET /profile-api HTTP/1.1" 200 -
+2025-06-13 18:53:47,300 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:53:47] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:55:11,964 - __main__ - INFO - Cont admin creat cu succes
+2025-06-13 18:55:11,981 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-13 18:55:11,981 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-13 18:55:11,983 - werkzeug - INFO -  * Restarting with stat
+2025-06-13 18:55:16,135 - __main__ - INFO - Cont admin creat cu succes
+2025-06-13 18:55:16,144 - werkzeug - WARNING -  * Debugger is active!
+2025-06-13 18:55:16,147 - werkzeug - INFO -  * Debugger PIN: 707-566-790
+2025-06-13 18:55:16,264 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:16] "GET / HTTP/1.1" 200 -
+2025-06-13 18:55:16,370 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:16] "GET /profile-api HTTP/1.1" 200 -
+2025-06-13 18:55:16,394 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:16] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:55:16,415 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:16] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:55:18,457 - __main__ - INFO - Utilizator deautentificat: admin
+2025-06-13 18:55:18,458 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:18] "POST /logout HTTP/1.1" 200 -
+2025-06-13 18:55:19,989 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:19] "GET / HTTP/1.1" 200 -
+2025-06-13 18:55:20,021 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:20] "[32mGET /profile-api HTTP/1.1[0m" 302 -
+2025-06-13 18:55:20,038 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:20] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:55:20,042 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:20] "GET /login?next=/profile-api HTTP/1.1" 200 -
+2025-06-13 18:55:22,714 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:22] "GET /login HTTP/1.1" 200 -
+2025-06-13 18:55:24,555 - __main__ - INFO - Utilizator autentificat: admin
+2025-06-13 18:55:24,558 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:24] "POST /login HTTP/1.1" 200 -
+2025-06-13 18:55:26,088 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:26] "GET / HTTP/1.1" 200 -
+2025-06-13 18:55:26,118 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:26] "GET /profile-api HTTP/1.1" 200 -
+2025-06-13 18:55:26,128 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:26] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:55:26,143 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:26] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:55:30,078 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:30] "GET /profile HTTP/1.1" 200 -
+2025-06-13 18:55:30,147 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:30] "GET /profile-api HTTP/1.1" 200 -
+2025-06-13 18:55:30,151 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:30] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:55:37,964 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:37] "GET /my-history HTTP/1.1" 200 -
+2025-06-13 18:55:47,630 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:47] "PUT /profile-api HTTP/1.1" 200 -
+2025-06-13 18:55:57,654 - __main__ - INFO - Utilizator deautentificat: admin
+2025-06-13 18:55:57,655 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:57] "POST /logout HTTP/1.1" 200 -
+2025-06-13 18:55:58,688 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:58] "GET / HTTP/1.1" 200 -
+2025-06-13 18:55:58,728 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:58] "[32mGET /profile-api HTTP/1.1[0m" 302 -
+2025-06-13 18:55:58,740 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:58] "GET /statistics HTTP/1.1" 200 -
+2025-06-13 18:55:58,740 - werkzeug - INFO - 127.0.0.1 - - [13/Jun/2025 18:55:58] "GET /login?next=/profile-api HTTP/1.1" 200 -

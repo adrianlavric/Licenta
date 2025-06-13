@@ -595,14 +595,11 @@
                         <i class="fas fa-user"></i>
                     </div>
                     <div class="user-dropdown" id="user-dropdown">
-                        <a href="#" onclick="showProfile()">
-                            <i class="fas fa-user-circle"></i> Profilul meu
+                        <a href="/profile">
+                            <i class="fas fa-user-circle"></i> Profil & Setări
                         </a>
                         <a href="#" onclick="showMyHistory()">
                             <i class="fas fa-history"></i> Istoricul meu
-                        </a>
-                        <a href="#" onclick="showSettings()">
-                            <i class="fas fa-cog"></i> Setări
                         </a>
                         <a href="#" onclick="logout()">
                             <i class="fas fa-sign-out-alt"></i> Deconectare
@@ -810,9 +807,10 @@
         }
 
         // Check authentication status
+        // Check authentication status
         async function checkAuthStatus() {
             try {
-                const response = await fetch('/profile');
+                const response = await fetch('/profile-api');
                 if (response.ok) {
                     const result = await response.json();
                     if (result.success) {
@@ -823,25 +821,29 @@
                     }
                 }
             } catch (error) {
-                console.log('User not authenticated');
-            }
-
-            if (!isAuthenticated) {
-                updateUIForAnonymousUser();
+                console.error('Error checking auth status:', error);
+                isAuthenticated = false;
+                updateUIForAuthenticatedUser();
             }
         }
 
         function updateUIForAuthenticatedUser() {
-            document.getElementById('user-menu').style.display = 'block';
-            document.getElementById('auth-buttons').style.display = 'none';
+            const authButtons = document.getElementById('auth-buttons');
+            const userMenu = document.getElementById('user-menu');
 
-            const welcomeMessage = document.getElementById('welcome-message');
-            const welcomeUsername = document.getElementById('welcome-username');
+            if (isAuthenticated && currentUser) {
+                authButtons.style.display = 'none';
+                userMenu.style.display = 'block';
 
-            welcomeUsername.textContent = currentUser.first_name || currentUser.username;
-            welcomeMessage.classList.add('show');
-
-            document.getElementById('history-title').textContent = 'Istoricul meu personal';
+                // Actualizează numele utilizatorului dacă există un element pentru asta
+                const userNameElement = document.getElementById('user-name');
+                if (userNameElement) {
+                    userNameElement.textContent = currentUser.first_name || currentUser.username;
+                }
+            } else {
+                authButtons.style.display = 'block';
+                userMenu.style.display = 'none';
+            }
         }
 
         function updateUIForAnonymousUser() {

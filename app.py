@@ -23,6 +23,11 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import json
 
+import sqlite3
+import os
+if os.path.exists('flower_predictions.db'):
+    print("Baza de date găsită")
+
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'secret-key'
@@ -353,7 +358,7 @@ def logout():
     return jsonify({'success': True, 'message': 'Deautentificare reușită!'})
 
 
-@app.route('/profile', methods=['GET', 'PUT'])
+@app.route('/profile-api', methods=['GET', 'PUT'])
 @login_required
 def profile():
     if request.method == 'GET':
@@ -387,6 +392,11 @@ def profile():
         logger.error(f"Eroare la actualizarea profilului: {e}")
         return jsonify({'success': False, 'error': 'Eroare la actualizarea profilului'}), 500
 
+@app.route('/profile')
+@login_required
+def profile_page():
+    """Pagina de profil și setări"""
+    return render_template('profile.html')
 
 @app.route('/change-password', methods=['POST'])
 @login_required
@@ -692,8 +702,9 @@ def file_too_large(error):
 
 def init_db():
     with app.app_context():
+        db.drop_all()
         db.create_all()
-        logger.info("Baza de date inițializată")
+        logger.info("Baza de date reinițializată")
 
         admin = User.query.filter_by(username='admin').first()
         if not admin:

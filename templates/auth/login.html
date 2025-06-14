@@ -213,6 +213,97 @@
                 margin: 1rem;
             }
         }
+
+        body.dark-mode {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #e0e0e0;
+}
+
+body.dark-mode .card {
+    background: #2d2d2d;
+    border: 1px solid #404040;
+    color: #e0e0e0;
+}
+
+body.dark-mode .form-control {
+    background: #3d3d3d;
+    border: 1px solid #555;
+    color: #e0e0e0;
+}
+
+body.dark-mode .form-control:focus {
+    background: #4d4d4d;
+    border-color: #28a745;
+    color: #e0e0e0;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+body.dark-mode .form-control::placeholder {
+    color: #aaa;
+}
+
+body.dark-mode .form-label {
+    color: #e0e0e0;
+}
+
+body.dark-mode .btn-primary {
+    background: #28a745;
+    border-color: #28a745;
+}
+
+body.dark-mode .btn-primary:hover {
+    background: #218838;
+    border-color: #1e7e34;
+}
+
+body.dark-mode .btn-secondary {
+    background: #555;
+    border-color: #555;
+    color: #e0e0e0;
+}
+
+body.dark-mode .btn-secondary:hover {
+    background: #666;
+    border-color: #666;
+}
+
+body.dark-mode .text-muted {
+    color: #aaa !important;
+}
+
+body.dark-mode .alert {
+    background: #3d3d3d;
+    border: 1px solid #555;
+    color: #e0e0e0;
+}
+
+body.dark-mode .alert-danger {
+    background: #4d2d2d;
+    border-color: #dc3545;
+    color: #f8d7da;
+}
+
+body.dark-mode .alert-success {
+    background: #2d4d2d;
+    border-color: #28a745;
+    color: #d4edda;
+}
+
+body.dark-mode .navbar {
+    background: #1a1a1a !important;
+}
+
+body.dark-mode .navbar-brand {
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode a {
+    color: #28a745;
+}
+
+body.dark-mode a:hover {
+    color: #34ce57;
+}
     </style>
 </head>
 <body>
@@ -266,6 +357,19 @@
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // Detectează tema din localStorage sau system preference
+    const savedTheme = localStorage.getItem('theme');
+    const systemDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDarkMode = savedTheme === 'dark' || (!savedTheme && systemDarkMode);
+
+    if (isDarkMode) {
+        document.body.classList.add('dark-mode');
+        document.documentElement.setAttribute('data-theme', 'dark');
+    }
+});
+
+
         document.getElementById('login-form').addEventListener('submit', async function(e) {
             e.preventDefault();
 

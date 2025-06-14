@@ -8,11 +8,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2d6e3e;
-            --secondary-color: #4a9460;
-            --accent-color: #7bc142;
-            --light-green: #e8f5e8;
-        }
+    --primary-color: #2d6e3e;
+    --secondary-color: #4a9460;
+    --accent-color: #7bc142;
+    --light-green: #e8f5e8;
+
+    /* Dark mode variables */
+    --dark-bg: #1a1a2e;
+    --dark-bg-secondary: #16213e;
+    --dark-surface: #2d2d2d;
+    --dark-surface-light: #3d3d3d;
+    --dark-text: #e0e0e0;
+    --dark-text-muted: #aaa;
+    --dark-border: #404040;
+}
 
         body {
             background: linear-gradient(135deg, var(--light-green) 0%, #f8f9fa 100%);
@@ -175,6 +184,99 @@
                 font-size: 2rem;
             }
         }
+        body.dark-mode,
+[data-theme="dark"] body {
+    background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-bg-secondary) 100%);
+    color: var(--dark-text);
+}
+
+body.dark-mode .navbar,
+[data-theme="dark"] .navbar {
+    background: #1a1a1a !important;
+}
+
+body.dark-mode .profile-header,
+[data-theme="dark"] .profile-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+body.dark-mode .stat-card,
+[data-theme="dark"] .stat-card {
+    background: var(--dark-surface);
+    color: var(--dark-text);
+}
+
+body.dark-mode .edit-profile-form,
+[data-theme="dark"] .edit-profile-form {
+    background: var(--dark-surface);
+    color: var(--dark-text);
+}
+
+body.dark-mode .form-control,
+[data-theme="dark"] .form-control {
+    background: var(--dark-surface-light);
+    border: 2px solid var(--dark-border);
+    color: var(--dark-text);
+}
+
+body.dark-mode .form-control:focus,
+[data-theme="dark"] .form-control:focus {
+    border-color: var(--primary-color);
+    background: var(--dark-surface-light);
+    color: var(--dark-text);
+    box-shadow: 0 0 0 0.2rem rgba(45, 110, 62, 0.25);
+}
+
+body.dark-mode .form-control::placeholder,
+[data-theme="dark"] .form-control::placeholder {
+    color: var(--dark-text-muted);
+}
+
+body.dark-mode .form-label,
+[data-theme="dark"] .form-label {
+    color: var(--dark-text);
+}
+
+body.dark-mode .history-card,
+[data-theme="dark"] .history-card {
+    background: var(--dark-surface);
+    color: var(--dark-text);
+}
+
+body.dark-mode .text-muted,
+[data-theme="dark"] .text-muted {
+    color: var(--dark-text-muted) !important;
+}
+
+body.dark-mode .alert,
+[data-theme="dark"] .alert {
+    background: var(--dark-surface);
+    border: 1px solid var(--dark-border);
+    color: var(--dark-text);
+}
+
+body.dark-mode .btn-outline-primary,
+[data-theme="dark"] .btn-outline-primary {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+body.dark-mode .btn-outline-primary:hover,
+[data-theme="dark"] .btn-outline-primary:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Loading overlay dark mode */
+body.dark-mode #loadingOverlay,
+[data-theme="dark"] #loadingOverlay {
+    background: rgba(0,0,0,0.8);
+}
+
+body.dark-mode #loadingOverlay > div,
+[data-theme="dark"] #loadingOverlay > div {
+    color: var(--dark-text);
+}
     </style>
 </head>
 <body>
@@ -355,6 +457,22 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // Detectează tema
+    const savedTheme = localStorage.getItem('theme');
+    const systemDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDarkMode = savedTheme === 'dark' || (!savedTheme && systemDarkMode);
+
+    if (isDarkMode) {
+        document.body.classList.add('dark-mode');
+        document.documentElement.setAttribute('data-theme', 'dark');
+    }
+
+    // Continuă cu restul codului existent...
+    loadProfile();
+    loadHistory();
+});
+
         let userProfile = null;
 
         // Load profile on page load

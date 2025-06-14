@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FlowerScan</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -578,6 +579,40 @@
             background: var(--accent-color);
             color: white;
         }
+
+        .info-card {
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #28a745;
+}
+
+.info-card h6 {
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.prediction-item {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.prediction-item:hover {
+    background-color: rgba(40, 167, 69, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+        @keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.7) translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
     </style>
 </head>
 <body>
@@ -1203,62 +1238,133 @@
             });
         }
 
-        // Modal functionality for flower info
-        function showFlowerInfo(flowerName) {
-            fetch(`/flower-info/${encodeURIComponent(flowerName)}`)
-                .then(response => response.json())
-                .then(result => {
-                    const modal = document.getElementById('flower-modal');
-                    const content = document.getElementById('flower-info-content');
+        async function showFlowerInfo(scientificName) {
+    console.log('showFlowerInfo called with:', scientificName);
 
-                    if (result.success) {
-                        const info = result.data;
-                        content.innerHTML = `
-                            <div class="flower-info">
-                                <h2>${info.scientific_name}</h2>
-                                <h3>${info.common_name || 'Nume comun nedisponibil'}</h3>
-                                <div class="info-grid">
-                                    <div class="info-item">
-                                        <h4>Familie</h4>
-                                        <p>${info.family || 'Nedisponibil'}</p>
-                                    </div>
-                                    <div class="info-item">
-                                        <h4>Origine</h4>
-                                        <p>${info.origin || 'Nedisponibil'}</p>
-                                    </div>
-                                    <div class="info-item">
-                                        <h4>Înflorire</h4>
-                                        <p>${info.flowering_period || 'Nedisponibil'}</p>
-                                    </div>
-                                    <div class="info-item">
-                                        <h4>Culori</h4>
-                                        <p>${info.colors || 'Nedisponibil'}</p>
-                                    </div>
-                                </div>
-                                <p style="margin-top: 2rem; text-align: left;">
-                                    <strong>Descriere:</strong> ${info.description || 'Descriere nedisponibilă.'}
-                                </p>
-                                <p style="margin-top: 1rem; text-align: left;">
-                                    <strong>Sfaturi de îngrijire:</strong> ${info.care_instructions || 'Sfaturi nedisponibile.'}
-                                </p>
-                            </div>
-                        `;
-                    } else {
-                        content.innerHTML = `
-                            <div class="flower-info">
-                                <h2>${flowerName}</h2>
-                                <p>Informații detaliate despre această floare nu sunt încă disponibile în baza de date.</p>
-                                <p>Această funcționalitate va fi extinsă în versiunile viitoare ale aplicației.</p>
-                            </div>
-                        `;
-                    }
+    try {
+        const response = await fetch(`/flower-info/${scientificName}`);
+        const data = await response.json();
 
-                    modal.style.display = 'block';
-                })
-                .catch(error => {
-                    showToast('Eroare la încărcarea informațiilor!');
-                });
+        if (data.success) {
+            displayFlowerModal(data.data);
+        } else {
+            console.log('No flower info available for:', scientificName);
+            alert('Informații indisponibile pentru această floare');
         }
+    } catch (error) {
+        console.error('Error fetching flower details:', error);
+        alert('Eroare la încărcarea informațiilor despre floare');
+    }
+}
+function displayFlowerModal(flowerInfo) {
+    // Detectează tema curentă la fiecare apel (nu doar prima dată)
+    const body = document.body;
+    const htmlElement = document.documentElement;
+
+    // Verifică multiple metode de detectare a dark mode
+    const isDarkMode = body.classList.contains('dark-mode') ||
+                       body.classList.contains('dark-theme') ||
+                       htmlElement.classList.contains('dark-mode') ||
+                       htmlElement.classList.contains('dark-theme') ||
+                       htmlElement.getAttribute('data-theme') === 'dark' ||
+                       htmlElement.getAttribute('data-bs-theme') === 'dark' ||
+                       getComputedStyle(body).backgroundColor === 'rgb(33, 37, 41)' || // Bootstrap dark
+                       window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    console.log('Dark mode detected:', isDarkMode); // Debug
+
+    // Stiluri pentru dark/light mode
+    const bgColor = isDarkMode ? '#1a1a1a' : 'white';
+    const textColor = isDarkMode ? '#e0e0e0' : '#333';
+    const cardBg = isDarkMode ? '#2d2d2d' : '#f8f9fa';
+    const borderColor = '#28a745';
+
+    const modalHTML = `
+        <div id="flowerDetailsModal" style="
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); z-index: 10000;
+            display: flex; align-items: center; justify-content: center;">
+            <div style="
+                background: ${bgColor};
+                color: ${textColor};
+                border-radius: 15px; padding: 2rem;
+                max-width: 700px; max-height: 80vh; overflow-y: auto;
+                margin: 1rem; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+                animation: modalSlideIn 0.3s ease;">
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 2px solid ${borderColor}; padding-bottom: 1rem;">
+                    <h2 style="color: #28a745; margin: 0; font-size: 1.8rem;">
+                        🌸 ${flowerInfo.common_name || flowerInfo.scientific_name}
+                    </h2>
+                    <button onclick="closeFlowerModal()" style="
+                        background: #dc3545; color: white; border: none;
+                        width: 40px; height: 40px; border-radius: 50%;
+                        cursor: pointer; font-size: 1.2rem; font-weight: bold;">×</button>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                    <div style="padding: 15px; background: ${cardBg}; border-radius: 8px; border-left: 4px solid ${borderColor};">
+                        <h6 style="color: #28a745; margin-bottom: 0.5rem; font-weight: 600;">🔬 Nume Științific</h6>
+                        <p style="margin: 0; font-style: italic; color: ${textColor};">${flowerInfo.scientific_name}</p>
+                    </div>
+                    <div style="padding: 15px; background: ${cardBg}; border-radius: 8px; border-left: 4px solid ${borderColor};">
+                        <h6 style="color: #28a745; margin-bottom: 0.5rem; font-weight: 600;">🌿 Familia</h6>
+                        <p style="margin: 0; color: ${textColor};">${flowerInfo.family || 'Informație indisponibilă'}</p>
+                    </div>
+                    <div style="padding: 15px; background: ${cardBg}; border-radius: 8px; border-left: 4px solid ${borderColor};">
+                        <h6 style="color: #28a745; margin-bottom: 0.5rem; font-weight: 600;">🌍 Origine</h6>
+                        <p style="margin: 0; color: ${textColor};">${flowerInfo.origin || 'Informație indisponibilă'}</p>
+                    </div>
+                    <div style="padding: 15px; background: ${cardBg}; border-radius: 8px; border-left: 4px solid ${borderColor};">
+                        <h6 style="color: #28a745; margin-bottom: 0.5rem; font-weight: 600;">📅 Perioada de Înflorire</h6>
+                        <p style="margin: 0; color: ${textColor};">${flowerInfo.flowering_period || 'Informație indisponibilă'}</p>
+                    </div>
+                </div>
+
+                <div style="padding: 15px; background: ${cardBg}; border-radius: 8px; border-left: 4px solid ${borderColor}; margin-bottom: 1rem;">
+                    <h6 style="color: #28a745; margin-bottom: 0.5rem; font-weight: 600;">🎨 Culori</h6>
+                    <p style="margin: 0; color: ${textColor};">${flowerInfo.colors || 'Informație indisponibilă'}</p>
+                </div>
+
+                <div style="padding: 15px; background: ${cardBg}; border-radius: 8px; border-left: 4px solid ${borderColor}; margin-bottom: 1rem;">
+                    <h6 style="color: #28a745; margin-bottom: 0.5rem; font-weight: 600;">ℹ️ Descriere</h6>
+                    <p style="margin: 0; line-height: 1.6; color: ${textColor};">${flowerInfo.description || 'Nu sunt disponibile informații descriptive.'}</p>
+                </div>
+
+                <div style="padding: 15px; background: ${cardBg}; border-radius: 8px; border-left: 4px solid ${borderColor};">
+                    <h6 style="color: #28a745; margin-bottom: 0.5rem; font-weight: 600;">🌱 Instrucțiuni de Îngrijire</h6>
+                    <p style="margin: 0; line-height: 1.6; color: ${textColor};">${flowerInfo.care_instructions || 'Nu sunt disponibile instrucțiuni de îngrijire.'}</p>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button onclick="closeFlowerModal()" style="
+                        background: #28a745; color: white; border: none;
+                        padding: 1rem 2rem; border-radius: 25px;
+                        cursor: pointer; font-size: 1rem; font-weight: bold;
+                        box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);">
+                        ✓ Închide
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Remove existing modal
+    const existingModal = document.getElementById('flowerDetailsModal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    // Add modal to body
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+}
+
+function closeFlowerModal() {
+    const modal = document.getElementById('flowerDetailsModal');
+    if (modal) {
+        modal.remove();
+    }
+}
 
         // Load statistics from server
         function loadStatistics() {

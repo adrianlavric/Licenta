@@ -237,21 +237,63 @@ def save_image(img_data, filename):
 
 
 def get_flower_info(scientific_name):
-    flower = FlowerInfo.query.filter_by(scientific_name=scientific_name).first()
-    if flower:
-        return {
-            'scientific_name': flower.scientific_name,
-            'common_name': flower.common_name,
-            'family': flower.family,
-            'origin': flower.origin,
-            'flowering_period': flower.flowering_period,
-            'colors': flower.colors,
-            'description': flower.description,
-            'care_instructions': flower.care_instructions,
-            'image_url': flower.image_url
-        }
-    return None
+    """Obține informații despre o floare din baza de date"""
+    print(f"Searching for flower: '{scientific_name}'")
 
+    try:
+        # Testează cu SQLAlchemy
+        flower = FlowerInfo.query.filter_by(scientific_name=scientific_name).first()
+        print(f"SQLAlchemy result: {flower is not None}")
+
+        if flower:
+            return {
+                'scientific_name': flower.scientific_name,
+                'common_name': flower.common_name,
+                'family': flower.family,
+                'origin': flower.origin,
+                'flowering_period': flower.flowering_period,
+                'colors': flower.colors,
+                'description': flower.description,
+                'care_instructions': flower.care_instructions,
+                'image_url': flower.image_url
+            }
+
+        # Dacă SQLAlchemy nu găsește, încearcă cu SQL direct
+        print("Trying direct SQL query...")
+        import sqlite3
+        conn = sqlite3.connect('flower_predictions.db')
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            SELECT scientific_name, common_name, family, origin, flowering_period, 
+                   colors, description, care_instructions, image_url
+            FROM flower_info 
+            WHERE scientific_name = ?
+        """, (scientific_name,))
+
+        result = cursor.fetchone()
+        conn.close()
+
+        if result:
+            print(f"Direct SQL found: {result[0]}")
+            return {
+                'scientific_name': result[0],
+                'common_name': result[1],
+                'family': result[2],
+                'origin': result[3],
+                'flowering_period': result[4],
+                'colors': result[5],
+                'description': result[6],
+                'care_instructions': result[7],
+                'image_url': result[8]
+            }
+
+        print("Not found in either method")
+        return None
+
+    except Exception as e:
+        print(f"Error in get_flower_info: {e}")
+        return None
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Înregistrare - FlowerScan</title>
+    <title>Inregistrare - FlowerScan</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
@@ -356,8 +356,8 @@ body.dark-mode a:hover {
     <div class="auth-container">
         <div class="logo">
             <i class="fas fa-seedling"></i>
-            <h1>FlowerAI</h1>
-            <p>Creează un cont nou</p>
+            <h1>FlowerScan</h1>
+            <p>Creeaza un cont nou</p>
         </div>
 
         <div id="error-message" class="error-message"></div>
@@ -370,7 +370,7 @@ body.dark-mode a:hover {
                     <div class="input-container">
                         <i class="fas fa-user"></i>
                         <input type="text" id="first_name" name="first_name"
-                               placeholder="Prenumele tău">
+                               placeholder="Prenumele tau">
                     </div>
                 </div>
 
@@ -379,7 +379,7 @@ body.dark-mode a:hover {
                     <div class="input-container">
                         <i class="fas fa-user"></i>
                         <input type="text" id="last_name" name="last_name"
-                               placeholder="Numele tău">
+                               placeholder="Numele tau">
                     </div>
                 </div>
             </div>
@@ -407,13 +407,13 @@ body.dark-mode a:hover {
                 <div class="input-container">
                     <i class="fas fa-lock"></i>
                     <input type="password" id="password" name="password" required
-                           placeholder="Alege o parolă sigură">
+                           placeholder="Alege o parolă sigura">
                 </div>
                 <div id="password-strength" class="password-strength"></div>
             </div>
 
             <div class="form-group">
-                <label for="confirm_password">Confirmă parola *</label>
+                <label for="confirm_password">Confirma parola *</label>
                 <div class="input-container">
                     <i class="fas fa-lock"></i>
                     <input type="password" id="confirm_password" name="confirm_password" required
@@ -422,12 +422,12 @@ body.dark-mode a:hover {
             </div>
 
             <div class="requirements">
-                <h4>Cerințe parolă:</h4>
+                <h4>Cerinte parola:</h4>
                 <ul>
-                    <li>Cel puțin 8 caractere</li>
-                    <li>O literă mare</li>
-                    <li>O literă mică</li>
-                    <li>O cifră</li>
+                    <li>Cel putin 8 caractere</li>
+                    <li>O litera mare</li>
+                    <li>O litera mică</li>
+                    <li>O cifra</li>
                 </ul>
             </div>
 
@@ -435,20 +435,19 @@ body.dark-mode a:hover {
                 <span id="register-text">Creează contul</span>
                 <div id="register-loading" class="loading">
                     <div class="spinner"></div>
-                    <span>Se creează contul...</span>
+                    <span>Se creeaza contul...</span>
                 </div>
             </button>
         </form>
 
         <div class="auth-links">
-            <p>Ai deja cont? <a href="/login">Autentifică-te aici</a></p>
-            <p><a href="/">← Înapoi la aplicație</a></p>
+            <p>Ai deja cont? <a href="/login">Autentifica-te aici</a></p>
+            <p><a href="/">← Inapoi la aplicatie</a></p>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-    // Detectează tema din localStorage sau system preference
     const savedTheme = localStorage.getItem('theme');
     const systemDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const isDarkMode = savedTheme === 'dark' || (!savedTheme && systemDarkMode);
@@ -459,7 +458,6 @@ body.dark-mode a:hover {
     }
 });
 
-        // Password strength checker
         document.getElementById('password').addEventListener('input', function() {
             const password = this.value;
             const strengthDiv = document.getElementById('password-strength');
@@ -473,30 +471,29 @@ body.dark-mode a:hover {
             let feedback = [];
 
             if (password.length >= 8) score++;
-            else feedback.push('cel puțin 8 caractere');
+            else feedback.push('cel putin 8 caractere');
 
             if (/[A-Z]/.test(password)) score++;
-            else feedback.push('o literă mare');
+            else feedback.push('o litera mare');
 
             if (/[a-z]/.test(password)) score++;
-            else feedback.push('o literă mică');
+            else feedback.push('o litera mică');
 
             if (/\d/.test(password)) score++;
             else feedback.push('o cifră');
 
             if (score < 2) {
                 strengthDiv.className = 'password-strength weak';
-                strengthDiv.textContent = 'Parolă slabă. Adaugă: ' + feedback.join(', ');
+                strengthDiv.textContent = 'Parola slabă. Adauga: ' + feedback.join(', ');
             } else if (score < 4) {
                 strengthDiv.className = 'password-strength medium';
-                strengthDiv.textContent = 'Parolă medie. Mai adaugă: ' + feedback.join(', ');
+                strengthDiv.textContent = 'Parola medie. Mai adauga: ' + feedback.join(', ');
             } else {
                 strengthDiv.className = 'password-strength strong';
-                strengthDiv.textContent = 'Parolă puternică!';
+                strengthDiv.textContent = 'Parola puternica!';
             }
         });
 
-        // Form submission
         document.getElementById('register-form').addEventListener('submit', async function(e) {
             e.preventDefault();
 
@@ -506,11 +503,9 @@ body.dark-mode a:hover {
             const errorMessage = document.getElementById('error-message');
             const successMessage = document.getElementById('success-message');
 
-            // Hide previous messages
             errorMessage.style.display = 'none';
             successMessage.style.display = 'none';
 
-            // Validate passwords match
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirm_password').value;
 
@@ -520,7 +515,6 @@ body.dark-mode a:hover {
                 return;
             }
 
-            // Show loading state
             registerText.style.display = 'none';
             registerLoading.style.display = 'flex';
             registerBtn.disabled = true;
@@ -548,7 +542,6 @@ body.dark-mode a:hover {
                     successMessage.textContent = result.message;
                     successMessage.style.display = 'block';
 
-                    // Clear form and redirect to login
                     document.getElementById('register-form').reset();
                     setTimeout(() => {
                         window.location.href = '/login';
@@ -559,7 +552,7 @@ body.dark-mode a:hover {
                 }
 
             } catch (error) {
-                errorMessage.textContent = 'Eroare de conexiune. Te rog încearcă din nou.';
+                errorMessage.textContent = 'Eroare de conexiune. Te rog incearca din nou.';
                 errorMessage.style.display = 'block';
             } finally {
                 // Reset loading state
@@ -569,7 +562,6 @@ body.dark-mode a:hover {
             }
         });
 
-        // Auto-focus on first input
         document.getElementById('first_name').focus();
     </script>
 </body>

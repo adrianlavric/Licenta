@@ -310,8 +310,8 @@ body.dark-mode a:hover {
     <div class="auth-container">
         <div class="logo">
             <i class="fas fa-seedling"></i>
-            <h1>FlowerAI</h1>
-            <p>Autentificare în cont</p>
+            <h1>FlowerScan</h1>
+            <p>Autentificare in cont</p>
         </div>
 
         <div id="error-message" class="error-message"></div>
@@ -338,27 +338,26 @@ body.dark-mode a:hover {
 
             <div class="checkbox-container">
                 <input type="checkbox" id="remember_me" name="remember_me">
-                <label for="remember_me">Ține-mă minte</label>
+                <label for="remember_me">Ține-ma minte</label>
             </div>
 
             <button type="submit" class="btn" id="login-btn">
                 <span id="login-text">Autentificare</span>
                 <div id="login-loading" class="loading">
                     <div class="spinner"></div>
-                    <span>Se autentifică...</span>
+                    <span>Se autentifica...</span>
                 </div>
             </button>
         </form>
 
         <div class="auth-links">
-            <p>Nu ai cont? <a href="/register">Înregistrează-te aici</a></p>
-            <p><a href="/">← Înapoi la aplicație</a></p>
+            <p>Nu ai cont? <a href="/register">Inregistreaza-te aici</a></p>
+            <p><a href="/">← Inapoi la aplicatie</a></p>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-    // Detectează tema din localStorage sau system preference
     const savedTheme = localStorage.getItem('theme');
     const systemDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const isDarkMode = savedTheme === 'dark' || (!savedTheme && systemDarkMode);
@@ -379,11 +378,9 @@ body.dark-mode a:hover {
             const errorMessage = document.getElementById('error-message');
             const successMessage = document.getElementById('success-message');
 
-            // Hide previous messages
             errorMessage.style.display = 'none';
             successMessage.style.display = 'none';
 
-            // Show loading state
             loginText.style.display = 'none';
             loginLoading.style.display = 'flex';
             loginBtn.disabled = true;
@@ -409,7 +406,6 @@ body.dark-mode a:hover {
                     successMessage.textContent = result.message;
                     successMessage.style.display = 'block';
 
-                    // Redirect after successful login
                     setTimeout(() => {
                         window.location.href = '/';
                     }, 1500);
@@ -419,17 +415,15 @@ body.dark-mode a:hover {
                 }
 
             } catch (error) {
-                errorMessage.textContent = 'Eroare de conexiune. Te rog încearcă din nou.';
+                errorMessage.textContent = 'Eroare de conexiune. Te rog incearca din nou.';
                 errorMessage.style.display = 'block';
             } finally {
-                // Reset loading state
                 loginText.style.display = 'block';
                 loginLoading.style.display = 'none';
                 loginBtn.disabled = false;
             }
         });
 
-        // Auto-focus on first input
         document.getElementById('username').focus();
     </script>
 </body>

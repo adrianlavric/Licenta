@@ -1,19 +1,14 @@
-from flask import Flask, render_template, request, jsonify, send_file, redirect, url_for, flash, session
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import numpy as np
-import os
 import tensorflow as tf
 from tensorflow.keras.preprocessing import image
 from PIL import Image
 import io
 import base64
-import json
 import logging
-from datetime import datetime
-import sqlite3
 from werkzeug.utils import secure_filename
 import uuid
 from functools import wraps
@@ -23,10 +18,9 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import json
 
-import sqlite3
 import os
 if os.path.exists('flower_predictions.db'):
-    print("Baza de date găsită")
+    print("Baza de date gasita.")
 
 app = Flask(__name__)
 
@@ -42,7 +36,7 @@ CORS(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
-login_manager.login_message = 'Te rog să te autentifici pentru a accesa această pagină.'
+login_manager.login_message = 'Te rog să te autentifici pentru a accesa această pagina.'
 login_manager.login_message_category = 'info'
 
 logging.basicConfig(
@@ -173,14 +167,14 @@ def validate_email(email):
 
 def validate_password(password):
     if len(password) < 8:
-        return False, "Parola trebuie să aibă cel puțin 8 caractere"
+        return False, "Parola trebuie să aiba cel putin 8 caractere"
     if not re.search(r'[A-Z]', password):
-        return False, "Parola trebuie să conțină cel puțin o literă mare"
+        return False, "Parola trebuie să contina cel putin o litera mare"
     if not re.search(r'[a-z]', password):
-        return False, "Parola trebuie să conțină cel puțin o literă mică"
+        return False, "Parola trebuie să contina cel putin o litera mica"
     if not re.search(r'\d', password):
-        return False, "Parola trebuie să conțină cel puțin o cifră"
-    return True, "Parolă validă"
+        return False, "Parola trebuie să contina cel putin o cifra"
+    return True, "Parola valida"
 
 
 def timing_decorator(f):
@@ -189,7 +183,7 @@ def timing_decorator(f):
         start_time = time.time()
         result = f(*args, **kwargs)
         end_time = time.time()
-        logger.info(f"{f.__name__} executat în {end_time - start_time:.2f} secunde")
+        logger.info(f"{f.__name__} executat in {end_time - start_time:.2f} secunde")
         return result
 
     return wrapper
@@ -237,11 +231,10 @@ def save_image(img_data, filename):
 
 
 def get_flower_info(scientific_name):
-    """Obține informații despre o floare din baza de date"""
+    """Obtine informatii despre o floare din baza de date"""
     print(f"Searching for flower: '{scientific_name}'")
 
     try:
-        # Testează cu SQLAlchemy
         flower = FlowerInfo.query.filter_by(scientific_name=scientific_name).first()
         print(f"SQLAlchemy result: {flower is not None}")
 
@@ -258,8 +251,7 @@ def get_flower_info(scientific_name):
                 'image_url': flower.image_url
             }
 
-        # Dacă SQLAlchemy nu găsește, încearcă cu SQL direct
-        print("Trying direct SQL query...")
+        print("Trying direct SQL query")
         import sqlite3
         conn = sqlite3.connect('flower_predictions.db')
         cursor = conn.cursor()
@@ -309,10 +301,10 @@ def register():
         last_name = data.get('last_name', '').strip()
 
         if not username or len(username) < 3:
-            return jsonify({'success': False, 'error': 'Username-ul trebuie să aibă cel puțin 3 caractere'}), 400
+            return jsonify({'success': False, 'error': 'Username-ul trebuie să aiba cel putin 3 caractere'}), 400
 
         if not validate_email(email):
-            return jsonify({'success': False, 'error': 'Adresa de email nu este validă'}), 400
+            return jsonify({'success': False, 'error': 'Adresa de email nu este valida'}), 400
 
         password_valid, password_message = validate_password(password)
         if not password_valid:
@@ -335,17 +327,17 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        logger.info(f"Utilizator nou înregistrat: {username}")
+        logger.info(f"Utilizator nou inregistrat: {username}")
 
         return jsonify({
             'success': True,
-            'message': 'Contul a fost creat cu succes! Te poți autentifica acum.',
+            'message': 'Contul a fost creat cu succes! Te poti autentifica acum.',
             'user': user.to_dict()
         })
 
     except Exception as e:
         db.session.rollback()
-        logger.error(f"Eroare la înregistrare: {e}")
+        logger.error(f"Eroare la inregistrare: {e}")
         return jsonify({'success': False, 'error': 'Eroare la crearea contului'}), 500
 
 
@@ -361,7 +353,7 @@ def login():
         remember_me = data.get('remember_me', False)
 
         if not username_or_email or not password:
-            return jsonify({'success': False, 'error': 'Username/email și parola sunt obligatorii'}), 400
+            return jsonify({'success': False, 'error': 'Username/email si parola sunt obligatorii'}), 400
 
         user = User.query.filter(
             (User.username == username_or_email) |
@@ -369,7 +361,7 @@ def login():
         ).first()
 
         if not user or not user.check_password(password):
-            return jsonify({'success': False, 'error': 'Username/email sau parolă incorectă'}), 401
+            return jsonify({'success': False, 'error': 'Username/email sau parola incorecta'}), 401
 
         if not user.is_active:
             return jsonify({'success': False, 'error': 'Contul este dezactivat'}), 401
@@ -382,7 +374,7 @@ def login():
 
         return jsonify({
             'success': True,
-            'message': 'Autentificare reușită!',
+            'message': 'Autentificare reusita!',
             'user': user.to_dict()
         })
 
@@ -397,7 +389,7 @@ def logout():
     username = current_user.username
     logout_user()
     logger.info(f"Utilizator deautentificat: {username}")
-    return jsonify({'success': True, 'message': 'Deautentificare reușită!'})
+    return jsonify({'success': True, 'message': 'Deautentificare reușita!'})
 
 
 @app.route('/profile-api', methods=['GET', 'PUT'])
@@ -437,7 +429,7 @@ def profile():
 @app.route('/profile')
 @login_required
 def profile_page():
-    """Pagina de profil și setări"""
+    """Pagina de profil si setari"""
     return render_template('profile.html')
 
 @app.route('/change-password', methods=['POST'])
@@ -449,7 +441,7 @@ def change_password():
         new_password = data.get('new_password', '')
 
         if not current_user.check_password(current_password):
-            return jsonify({'success': False, 'error': 'Parola curentă este incorectă'}), 400
+            return jsonify({'success': False, 'error': 'Parola curenta este incorecta'}), 400
 
         password_valid, password_message = validate_password(new_password)
         if not password_valid:
@@ -514,7 +506,7 @@ def predict():
         db.session.commit()
 
         logger.info(
-            f"Predicție salvată: {top_predictions[0]['class']} ({top_predictions[0]['confidence']:.2f}%) - User: {current_user.username if current_user.is_authenticated else 'Anonim'}")
+            f"Predictie salvata: {top_predictions[0]['class']} ({top_predictions[0]['confidence']:.2f}%) - User: {current_user.username if current_user.is_authenticated else 'Anonim'}")
 
         flower_info = get_flower_info(top_predictions[0]['class'])
 
@@ -532,7 +524,7 @@ def predict():
         return jsonify(result)
 
     except Exception as e:
-        logger.error(f"Eroare la predicție: {e}")
+        logger.error(f"Eroare la predictie: {e}")
         return jsonify({
             'success': False,
             'error': str(e)
@@ -548,13 +540,13 @@ def flower_info(scientific_name):
         else:
             return jsonify({
                 'success': False,
-                'error': 'Informații indisponibile pentru această floare'
+                'error': 'Informatii indisponibile pentru această floare'
             }), 404
     except Exception as e:
-        logger.error(f"Eroare la obținerea informațiilor florii: {e}")
+        logger.error(f"Eroare la obtinerea informatiilor florii: {e}")
         return jsonify({
             'success': False,
-            'error': 'Eroare la obținerea informațiilor'
+            'error': 'Eroare la obținerea informatiilor'
         }), 500
 
 
@@ -575,13 +567,13 @@ def submit_feedback():
         if not prediction:
             return jsonify({
                 'success': False,
-                'error': 'Predicția nu a fost găsită'
+                'error': 'Predictia nu a fost gasita'
             }), 404
 
         prediction.user_feedback = feedback
         db.session.commit()
 
-        logger.info(f"Feedback primit pentru predicția {prediction_id}: {feedback}")
+        logger.info(f"Feedback primit pentru predictia {prediction_id}: {feedback}")
 
         return jsonify({'success': True, 'message': 'Feedback salvat cu succes'})
 
@@ -629,10 +621,10 @@ def get_statistics():
         return jsonify({'success': True, 'data': stats})
 
     except Exception as e:
-        logger.error(f"Eroare la obținerea statisticilor: {e}")
+        logger.error(f"Eroare la obtinerea statisticilor: {e}")
         return jsonify({
             'success': False,
-            'error': 'Eroare la obținerea statisticilor'
+            'error': 'Eroare la obtinerea statisticilor'
         }), 500
 
 
@@ -659,10 +651,10 @@ def get_history(session_id):
         return jsonify({'success': True, 'data': history})
 
     except Exception as e:
-        logger.error(f"Eroare la obținerea istoricului: {e}")
+        logger.error(f"Eroare la obtinerea istoricului: {e}")
         return jsonify({
             'success': False,
-            'error': 'Eroare la obținerea istoricului'
+            'error': 'Eroare la obtinerea istoricului'
         }), 500
 
 
@@ -719,34 +711,34 @@ def my_history():
         return jsonify({'success': True, 'data': history})
 
     except Exception as e:
-        logger.error(f"Eroare la obținerea istoricului personal: {e}")
+        logger.error(f"Eroare la obtinerea istoricului personal: {e}")
         return jsonify({
             'success': False,
-            'error': 'Eroare la obținerea istoricului'
+            'error': 'Eroare la obtinerea istoricului'
         }), 500
 
 
 @app.errorhandler(404)
 def not_found(error):
-    return jsonify({'success': False, 'error': 'Resursa nu a fost găsită'}), 404
+    return jsonify({'success': False, 'error': 'Resursa nu a fost gasita'}), 404
 
 
 @app.errorhandler(500)
 def internal_error(error):
     db.session.rollback()
-    return jsonify({'success': False, 'error': 'Eroare internă a serverului'}), 500
+    return jsonify({'success': False, 'error': 'Eroare interna a serverului'}), 500
 
 
 @app.errorhandler(413)
 def file_too_large(error):
-    return jsonify({'success': False, 'error': 'Fișierul este prea mare'}), 413
+    return jsonify({'success': False, 'error': 'Fisierul este prea mare'}), 413
 
 
 def init_db():
     with app.app_context():
         db.drop_all()
         db.create_all()
-        logger.info("Baza de date reinițializată")
+        logger.info("Baza de date reinitializata")
 
         admin = User.query.filter_by(username='admin').first()
         if not admin:

@@ -72,10 +72,9 @@
             align-items: center;
         }
 
-        /* User Menu Styles */
         .user-menu {
             position: relative;
-            display: none; /* Hidden by default, shown when logged in */
+            display: none;
         }
 
         .user-avatar {
@@ -174,7 +173,6 @@
             padding: 2rem;
         }
 
-        /* Welcome Message */
         .welcome-message {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
@@ -613,7 +611,6 @@
     }
 }
 
-       /* Responsive Fixes pentru Mobile - Structura ta actuală */
 @media (max-width: 768px) {
     .nav-container {
         flex-wrap: wrap;
@@ -691,7 +688,6 @@
         font-size: 0.9rem;
     }
 
-    /* Ascunde textul pe mobile pentru butoanele mici */
     .nav-actions > .btn span {
         display: none;
     }
@@ -719,11 +715,10 @@
         box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
 
-    /* Ajustează conținutul principal */
     .hero-section,
     .upload-section,
     .results-section {
-        margin-top: 120px; /* Space pentru navbar expandat */
+        margin-top: 120px;
     }
 }
 
@@ -746,7 +741,6 @@
         font-size: 0.9rem;
     }
 
-    /* Ajustează conținutul principal */
     .hero-section,
     .upload-section,
     .results-section {
@@ -765,7 +759,6 @@
     }
 }
 
-/* Fix pentru modal pe mobile */
 @media (max-width: 600px) {
     #flowerDetailsModal > div {
         max-width: 95% !important;
@@ -796,14 +789,12 @@
         gap: 0.75rem !important;
     }
 
-    /* Stiluri pentru carduri pe mobile */
     #flowerDetailsModal [style*="padding: 15px"] {
         padding: 1rem !important;
         margin-bottom: 0.75rem !important;
     }
 }
 
-/* Ensure navbar stays at top */
 .navbar {
     position: fixed;
     top: 0;
@@ -813,7 +804,6 @@
     min-height: 60px;
 }
 
-/* Adjust body to account for fixed navbar */
 body {
     padding-top: 60px;
 }
@@ -830,25 +820,23 @@ body {
     }
 }
 
-        /* Fix pentru suprapunerea cu statisticile */
 @media (max-width: 600px) {
     body {
-        padding-top: 140px; /* Mărește padding-ul */
+        padding-top: 140px;
     }
 
-    /* Ajustează toate secțiunile principale */
     .hero-section,
     .upload-section,
     .results-section,
     .statistics-section,
     .container:first-of-type {
-        margin-top: 20px; /* Extra margin pentru siguranță */
+        margin-top: 20px;
     }
 }
 
 @media (max-width: 400px) {
     body {
-        padding-top: 160px; /* Și mai mult padding pentru ecrane foarte mici */
+        padding-top: 160px;
     }
 
     .hero-section,
@@ -860,7 +848,6 @@ body {
     }
 }
 
-/* Dacă statisticile au o clasă specifică, ajustează și asta */
 .stats-container,
 .dashboard-stats,
 .main-stats {
@@ -875,7 +862,6 @@ body {
     }
 }
 
-/* Fix general pentru primul element din container */
 .container > *:first-child,
 .main-content > *:first-child {
     margin-top: 20px;
@@ -888,14 +874,13 @@ body {
     }
 }
 
-/* Ajustează înălțimea navbar-ului dinamic */
 .navbar {
     min-height: 60px;
 }
 
 @media (max-width: 600px) {
     .navbar {
-        min-height: 120px; /* Ajustează după înălțimea reală */
+        min-height: 120px;
     }
 }
 
@@ -908,22 +893,20 @@ body {
     </style>
 </head>
 <body>
-    <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
                 <i class="fas fa-seedling"></i>
-                FlowerAI
+                FlowerScan
             </div>
             <div class="nav-actions">
-                <!-- User Menu (shown when logged in) -->
                 <div class="user-menu" id="user-menu" >
                     <div class="user-avatar" onclick="toggleUserDropdown()">
                         <i class="fas fa-user"></i>
                     </div>
                     <div class="user-dropdown" id="user-dropdown">
                         <a href="/profile">
-                            <i class="fas fa-user-circle"></i> Profil & Setări
+                            <i class="fas fa-user-circle"></i> Profil & Setari
                         </a>
                         <a href="#" onclick="showMyHistory()">
                             <i class="fas fa-history"></i> Istoricul meu
@@ -934,7 +917,6 @@ body {
                     </div>
                 </div>
 
-                <!-- Auth Buttons (shown when not logged in) -->
                 <div class="auth-buttons" id="auth-buttons">
                     <a href="/login" class="btn btn-secondary">
                         <i class="fas fa-sign-in-alt"></i>
@@ -942,13 +924,13 @@ body {
                     </a>
                     <a href="/register" class="btn btn-primary">
                         <i class="fas fa-user-plus"></i>
-                        Înregistrare
+                        Inregistrare
                     </a>
                 </div>
 
                 <button class="btn btn-secondary" onclick="toggleDarkMode()">
                     <i class="fas fa-moon"></i>
-                    <span id="theme-text">Mod întunecat</span>
+                    <span id="theme-text">Mod intunecat</span>
                 </button>
                 <button class="btn btn-secondary" onclick="exportHistory()">
                     <i class="fas fa-download"></i>
@@ -956,32 +938,30 @@ body {
                 </button>
                 <button class="btn btn-primary" onclick="clearHistory()" id="clear-history-btn">
                     <i class="fas fa-trash"></i>
-                    Șterge istoric
+                    Sterge istoric
                 </button>
             </div>
         </div>
     </nav>
 
     <div class="container">
-        <!-- Welcome Message for logged in users -->
         <div class="welcome-message" id="welcome-message">
             <i class="fas fa-hand-wave"></i>
-            <span>Bun venit înapoi, <strong id="welcome-username"></strong>!</span>
+            <span>Bun venit inapoi, <strong id="welcome-username"></strong>!</span>
         </div>
 
-        <!-- Dashboard Statistics -->
         <div class="dashboard">
             <div class="stat-card">
                 <span class="stat-number" id="total-predictions">0</span>
-                <div class="stat-label">Predicții totale</div>
+                <div class="stat-label">Predictii totale</div>
             </div>
             <div class="stat-card">
                 <span class="stat-number" id="accuracy-rate">85%</span>
-                <div class="stat-label">Acuratețe model</div>
+                <div class="stat-label">Acuratete model</div>
             </div>
             <div class="stat-card">
                 <span class="stat-number" id="session-predictions">0</span>
-                <div class="stat-label">Predicții sesiune</div>
+                <div class="stat-label">Predictii sesiune</div>
             </div>
             <div class="stat-card">
                 <span class="stat-number">102</span>
@@ -989,21 +969,19 @@ body {
             </div>
         </div>
 
-        <!-- Main Content -->
         <div class="main-content">
-            <!-- Upload Section -->
             <div class="upload-section">
                 <h2 class="section-title">
                     <i class="fas fa-upload"></i>
-                    Încarcă imaginea
+                    Incarca imaginea
                 </h2>
 
                 <div class="upload-area" id="upload-area">
                     <div class="upload-icon">
                         <i class="fas fa-cloud-upload-alt"></i>
                     </div>
-                    <div class="upload-text">Trage și lasă imaginea aici</div>
-                    <div class="upload-subtext">sau fă clic pentru a selecta</div>
+                    <div class="upload-text">Trage si lasa imaginea aici</div>
+                    <div class="upload-subtext">sau fa clic pentru a selecta</div>
                     <input type="file" id="file-input" accept="image/*" style="display: none;" multiple>
                 </div>
 
@@ -1013,7 +991,7 @@ body {
                     <div style="margin-top: 15px;">
                         <button id="predict-btn" class="btn btn-primary">
                             <i class="fas fa-search"></i>
-                            Identifică floarea
+                            Identifica floarea
                         </button>
                         <button id="reset-btn" class="btn btn-secondary" style="background-color: #f44336; margin-left: 10px;">
                             <i class="fas fa-undo"></i>
@@ -1022,11 +1000,10 @@ body {
                     </div>
                 </div>
 
-                <!-- Camera Section -->
                 <div class="camera-section">
                     <h3 class="section-title">
                         <i class="fas fa-camera"></i>
-                        Cameră web
+                        Camera web
                     </h3>
                     <div class="video-container" id="video-container" style="display: none;">
                         <video id="camera-video" autoplay playsinline></video>
@@ -1035,26 +1012,25 @@ body {
                     <div class="camera-controls">
                         <button class="btn btn-primary" onclick="startCamera()">
                             <i class="fas fa-video"></i>
-                            Pornește camera
+                            Porneste camera
                         </button>
                         <button class="btn btn-secondary" onclick="capturePhoto()" id="capture-btn" style="display: none;">
                             <i class="fas fa-camera"></i>
-                            Capturează
+                            Inregistreaza
                         </button>
                         <button class="btn btn-secondary" onclick="stopCamera()" id="stop-btn" style="display: none;">
                             <i class="fas fa-stop"></i>
-                            Oprește
+                            Opreste
                         </button>
                     </div>
                 </div>
 
                 <div class="loading" id="loading">
                     <div class="spinner"></div>
-                    <span>Analizez imaginea...</span>
+                    <span>Analizez imaginea</span>
                 </div>
             </div>
 
-            <!-- Results Section -->
             <div class="results-section">
                 <h2 class="section-title">
                     <i class="fas fa-chart-bar"></i>
@@ -1062,19 +1038,17 @@ body {
                 </h2>
                 <div id="results-container">
                     <p style="text-align: center; opacity: 0.7; margin: 2rem 0;">
-                        Încarcă o imagine pentru a vedea rezultatele
+                        Incarca o imagine pentru a vedea rezultatele
                     </p>
                 </div>
 
-                <!-- Chart container -->
                 <div class="chart-container" id="chart-container" style="display: none;">
                     <canvas id="prediction-chart"></canvas>
                 </div>
 
-                <!-- Verification section -->
                 <div id="verification-section" class="verification-section">
-                    <h3>Evaluează predicția</h3>
-                    <p>Este predicția corectă?</p>
+                    <h3>Evalueaza predictia</h3>
+                    <p>Este predictia corecta?</p>
                     <div class="feedback-buttons">
                         <button id="correct-btn" class="btn btn-success" onclick="submitFeedback('correct')">
                             <i class="fas fa-check"></i>
@@ -1090,21 +1064,19 @@ body {
             </div>
         </div>
 
-        <!-- History Section -->
         <div class="history-section">
             <h2 class="section-title">
                 <i class="fas fa-history"></i>
-                <span id="history-title">Istoric predicții</span>
+                <span id="history-title">Istoric predictii</span>
             </h2>
             <div id="history-container">
                 <p style="text-align: center; opacity: 0.7; margin: 2rem 0;">
-                    Istoricul va apărea aici după primele predicții
+                    Istoricul va aparea aici după primele predictii
                 </p>
             </div>
         </div>
     </div>
 
-    <!-- Modal for flower information -->
     <div id="flower-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -1112,7 +1084,6 @@ body {
         </div>
     </div>
 
-    <!-- Toast notifications -->
     <div id="toast" class="toast"></div>
 
     <script>
@@ -1128,13 +1099,10 @@ body {
         let currentUser = null;
         let isAuthenticated = false;
 
-        // Generate unique session ID
         function generateSessionId() {
             return 'session_' + Math.random().toString(36).substr(2, 9);
         }
 
-        // Check authentication status
-        // Check authentication status
         async function checkAuthStatus() {
             try {
                 const response = await fetch('/profile-api');
@@ -1162,7 +1130,6 @@ body {
                 authButtons.style.display = 'none';
                 userMenu.style.display = 'block';
 
-                // Actualizează numele utilizatorului dacă există un element pentru asta
                 const userNameElement = document.getElementById('user-name');
                 if (userNameElement) {
                     userNameElement.textContent = currentUser.first_name || currentUser.username;
@@ -1184,7 +1151,6 @@ body {
             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         }
 
-        // Close dropdown when clicking outside
         document.addEventListener('click', function(event) {
             const userMenu = document.getElementById('user-menu');
             const dropdown = document.getElementById('user-dropdown');
@@ -1207,7 +1173,6 @@ body {
                     updateUIForAnonymousUser();
                     showToast('Deconectat cu succes!');
 
-                    // Clear personal history and reload page
                     setTimeout(() => {
                         window.location.reload();
                     }, 1500);
@@ -1230,12 +1195,12 @@ body {
                     updateStats();
                 }
             } catch (error) {
-                console.log('Eroare la încărcarea istoricului:', error);
+                console.log('Eroare la incarcarea istoricului:', error);
             }
         }
 
         function showProfile() {
-            showToast('Funcționalitate în dezvoltare!');
+            showToast('Functionalitate in dezvoltare!');
         }
 
         function showMyHistory() {
@@ -1243,7 +1208,7 @@ body {
         }
 
         function showSettings() {
-            showToast('Funcționalitate în dezvoltare!');
+            showToast('Functionalitate in dezvoltare!');
         }
 
         // Initialize the app
@@ -1258,7 +1223,6 @@ body {
             }
         });
 
-        // File upload handling
         const uploadArea = document.getElementById('upload-area');
         const fileInput = document.getElementById('file-input');
         const previewContainer = document.getElementById('preview-container');
@@ -1306,12 +1270,11 @@ body {
                     };
                     reader.readAsDataURL(file);
                 } else {
-                    showToast('Te rog selectează un fișier imagine!');
+                    showToast('Te rog selecteaza un fisier imagine!');
                 }
             }
         }
 
-        // Camera functionality
         async function startCamera() {
             try {
                 currentStream = await navigator.mediaDevices.getUserMedia({
@@ -1324,7 +1287,7 @@ body {
                 document.getElementById('capture-btn').style.display = 'block';
                 document.getElementById('stop-btn').style.display = 'block';
 
-                showToast('Camera pornită cu succes!');
+                showToast('Camera pornita cu succes!');
             } catch (error) {
                 showToast('Eroare la pornirea camerei: ' + error.message);
             }
@@ -1344,7 +1307,7 @@ body {
             previewContainer.style.display = 'block';
             hideResults();
 
-            showToast('Fotografia a fost capturată!');
+            showToast('Fotografia a fost capturata!');
         }
 
         function stopCamera() {
@@ -1357,10 +1320,9 @@ body {
             document.getElementById('capture-btn').style.display = 'none';
             document.getElementById('stop-btn').style.display = 'none';
 
-            showToast('Camera oprită');
+            showToast('Camera oprita');
         }
 
-        // Prediction functionality
         predictBtn.addEventListener('click', async function() {
             const imageData = previewImage.src;
             if (!imageData) return;
@@ -1391,10 +1353,8 @@ body {
                     createPredictionChart(result.predictions);
 
                     if (isAuthenticated) {
-                        // Reload user history for authenticated users
                         loadUserHistory();
                     } else {
-                        // Add to local history for anonymous users
                         const prediction = {
                             id: Date.now(),
                             filename: 'uploaded_image.jpg',
@@ -1412,7 +1372,7 @@ body {
                     sessionPredictions++;
                     updateStats();
                     showResults();
-                    showToast('Predicție completă!');
+                    showToast('Predictie completa!');
                 } else {
                     showToast('Eroare la procesarea imaginii: ' + result.error);
                 }
@@ -1423,7 +1383,6 @@ body {
             }
         });
 
-        // Chart functionality
         function createPredictionChart(predictions) {
             if (predictionChart) {
                 predictionChart.destroy();
@@ -1442,7 +1401,7 @@ body {
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Încredere (%)',
+                        label: 'Incredere (%)',
                         data: confidences,
                         backgroundColor: colors,
                         borderColor: colors.map(c => c.replace('0.6', '1').replace('0.8', '1')),
@@ -1456,7 +1415,7 @@ body {
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
-                                    return `Încredere: ${context.parsed.x.toFixed(2)}%`;
+                                    return `Incredere: ${context.parsed.x.toFixed(2)}%`;
                                 }
                             }
                         }
@@ -1467,7 +1426,7 @@ body {
                             max: 100,
                             title: {
                                 display: true,
-                                text: 'Încredere (%)'
+                                text: 'Incredere (%)'
                             }
                         }
                     }
@@ -1475,7 +1434,6 @@ body {
             });
         }
 
-        // Display results
         function displayResults(predictions) {
             const resultsContainer = document.getElementById('results-container');
             resultsContainer.innerHTML = '';
@@ -1495,10 +1453,9 @@ body {
             });
         }
 
-        // Feedback functionality
         function submitFeedback(feedback) {
             if (!currentPredictionId) {
-                showToast('Nu există predicție pentru feedback!');
+                showToast('Nu exista predictie pentru feedback!');
                 return;
             }
 
@@ -1517,8 +1474,8 @@ body {
                 if (result.success) {
                     const verificationResult = document.getElementById('verification-result');
                     verificationResult.innerHTML = feedback === 'correct'
-                        ? '<span class="correct">✓ Mulțumim pentru feedback! Predicția a fost marcată ca fiind corectă.</span>'
-                        : '<span class="incorrect">✓ Mulțumim pentru feedback! Predicția a fost marcată ca fiind incorectă.</span>';
+                        ? '<span class="correct">✓ Multumim pentru feedback! Predictia a fost marcata ca fiind corecta.</span>'
+                        : '<span class="incorrect">✓ Multumim pentru feedback! Predictia a fost marcata ca fiind incorecta.</span>';
                     verificationResult.style.display = 'block';
                     showToast('Feedback trimis cu succes!');
                 } else {
@@ -1541,31 +1498,27 @@ body {
             displayFlowerModal(data.data);
         } else {
             console.log('No flower info available for:', scientificName);
-            alert('Informații indisponibile pentru această floare');
+            alert('Informatii indisponibile pentru aceasta floare');
         }
     } catch (error) {
         console.error('Error fetching flower details:', error);
-        alert('Eroare la încărcarea informațiilor despre floare');
+        alert('Eroare la incarcarea informatiilor despre floare');
     }
 }
 function displayFlowerModal(flowerInfo) {
-    // Detectează tema curentă la fiecare apel (nu doar prima dată)
     const body = document.body;
     const htmlElement = document.documentElement;
 
-    // Verifică multiple metode de detectare a dark mode
     const isDarkMode = body.classList.contains('dark-mode') ||
                        body.classList.contains('dark-theme') ||
                        htmlElement.classList.contains('dark-mode') ||
                        htmlElement.classList.contains('dark-theme') ||
                        htmlElement.getAttribute('data-theme') === 'dark' ||
                        htmlElement.getAttribute('data-bs-theme') === 'dark' ||
-                       getComputedStyle(body).backgroundColor === 'rgb(33, 37, 41)' || // Bootstrap dark
+                       getComputedStyle(body).backgroundColor === 'rgb(33, 37, 41)' ||
                        window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    console.log('Dark mode detected:', isDarkMode); // Debug
 
-    // Stiluri pentru dark/light mode
     const bgColor = isDarkMode ? '#1a1a1a' : 'white';
     const textColor = isDarkMode ? '#e0e0e0' : '#333';
     const cardBg = isDarkMode ? '#2d2d2d' : '#f8f9fa';
@@ -1586,7 +1539,7 @@ function displayFlowerModal(flowerInfo) {
 
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 2px solid ${borderColor}; padding-bottom: 1rem;">
                     <h2 style="color: #28a745; margin: 0; font-size: 1.8rem;">
-                        🌸 ${flowerInfo.common_name || flowerInfo.scientific_name}
+                        ${flowerInfo.common_name || flowerInfo.scientific_name}
                     </h2>
                     <button onclick="closeFlowerModal()" style="
                         background: #dc3545; color: white; border: none;
@@ -1596,36 +1549,36 @@ function displayFlowerModal(flowerInfo) {
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
                     <div style="padding: 15px; background: ${cardBg}; border-radius: 8px; border-left: 4px solid ${borderColor};">
-                        <h6 style="color: #28a745; margin-bottom: 0.5rem; font-weight: 600;">🔬 Nume Științific</h6>
+                        <h6 style="color: #28a745; margin-bottom: 0.5rem; font-weight: 600;">Nume Stiintific</h6>
                         <p style="margin: 0; font-style: italic; color: ${textColor};">${flowerInfo.scientific_name}</p>
                     </div>
                     <div style="padding: 15px; background: ${cardBg}; border-radius: 8px; border-left: 4px solid ${borderColor};">
-                        <h6 style="color: #28a745; margin-bottom: 0.5rem; font-weight: 600;">🌿 Familia</h6>
-                        <p style="margin: 0; color: ${textColor};">${flowerInfo.family || 'Informație indisponibilă'}</p>
+                        <h6 style="color: #28a745; margin-bottom: 0.5rem; font-weight: 600;">Familia</h6>
+                        <p style="margin: 0; color: ${textColor};">${flowerInfo.family || 'Informatie indisponibila'}</p>
                     </div>
                     <div style="padding: 15px; background: ${cardBg}; border-radius: 8px; border-left: 4px solid ${borderColor};">
-                        <h6 style="color: #28a745; margin-bottom: 0.5rem; font-weight: 600;">🌍 Origine</h6>
-                        <p style="margin: 0; color: ${textColor};">${flowerInfo.origin || 'Informație indisponibilă'}</p>
+                        <h6 style="color: #28a745; margin-bottom: 0.5rem; font-weight: 600;">Origine</h6>
+                        <p style="margin: 0; color: ${textColor};">${flowerInfo.origin || 'Informatie indisponibila'}</p>
                     </div>
                     <div style="padding: 15px; background: ${cardBg}; border-radius: 8px; border-left: 4px solid ${borderColor};">
-                        <h6 style="color: #28a745; margin-bottom: 0.5rem; font-weight: 600;">📅 Perioada de Înflorire</h6>
-                        <p style="margin: 0; color: ${textColor};">${flowerInfo.flowering_period || 'Informație indisponibilă'}</p>
+                        <h6 style="color: #28a745; margin-bottom: 0.5rem; font-weight: 600;">Perioada de Inflorire</h6>
+                        <p style="margin: 0; color: ${textColor};">${flowerInfo.flowering_period || 'Informatie indisponibila'}</p>
                     </div>
                 </div>
 
                 <div style="padding: 15px; background: ${cardBg}; border-radius: 8px; border-left: 4px solid ${borderColor}; margin-bottom: 1rem;">
-                    <h6 style="color: #28a745; margin-bottom: 0.5rem; font-weight: 600;">🎨 Culori</h6>
-                    <p style="margin: 0; color: ${textColor};">${flowerInfo.colors || 'Informație indisponibilă'}</p>
+                    <h6 style="color: #28a745; margin-bottom: 0.5rem; font-weight: 600;">Culori</h6>
+                    <p style="margin: 0; color: ${textColor};">${flowerInfo.colors || 'Informatie indisponibila'}</p>
                 </div>
 
                 <div style="padding: 15px; background: ${cardBg}; border-radius: 8px; border-left: 4px solid ${borderColor}; margin-bottom: 1rem;">
-                    <h6 style="color: #28a745; margin-bottom: 0.5rem; font-weight: 600;">ℹ️ Descriere</h6>
-                    <p style="margin: 0; line-height: 1.6; color: ${textColor};">${flowerInfo.description || 'Nu sunt disponibile informații descriptive.'}</p>
+                    <h6 style="color: #28a745; margin-bottom: 0.5rem; font-weight: 600;">ℹDescriere</h6>
+                    <p style="margin: 0; line-height: 1.6; color: ${textColor};">${flowerInfo.description || 'Nu sunt disponibile informatii descriptive.'}</p>
                 </div>
 
                 <div style="padding: 15px; background: ${cardBg}; border-radius: 8px; border-left: 4px solid ${borderColor};">
-                    <h6 style="color: #28a745; margin-bottom: 0.5rem; font-weight: 600;">🌱 Instrucțiuni de Îngrijire</h6>
-                    <p style="margin: 0; line-height: 1.6; color: ${textColor};">${flowerInfo.care_instructions || 'Nu sunt disponibile instrucțiuni de îngrijire.'}</p>
+                    <h6 style="color: #28a745; margin-bottom: 0.5rem; font-weight: 600;">Instructiuni de Ingrijire</h6>
+                    <p style="margin: 0; line-height: 1.6; color: ${textColor};">${flowerInfo.care_instructions || 'Nu sunt disponibile instructiuni de ingrijire.'}</p>
                 </div>
 
                 <div style="text-align: center; margin-top: 2rem;">
@@ -1634,20 +1587,18 @@ function displayFlowerModal(flowerInfo) {
                         padding: 1rem 2rem; border-radius: 25px;
                         cursor: pointer; font-size: 1rem; font-weight: bold;
                         box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);">
-                        ✓ Închide
+                        Inchide
                     </button>
                 </div>
             </div>
         </div>
     `;
 
-    // Remove existing modal
     const existingModal = document.getElementById('flowerDetailsModal');
     if (existingModal) {
         existingModal.remove();
     }
 
-    // Add modal to body
     document.body.insertAdjacentHTML('beforeend', modalHTML);
 }
 
@@ -1658,7 +1609,6 @@ function closeFlowerModal() {
     }
 }
 
-        // Load statistics from server
         function loadStatistics() {
             fetch('/statistics')
                 .then(response => response.json())
@@ -1670,11 +1620,10 @@ function closeFlowerModal() {
                     }
                 })
                 .catch(error => {
-                    console.log('Nu s-au putut încărca statisticile:', error);
+                    console.log('Nu s-au putut incarca statisticile:', error);
                 });
         }
 
-        // Utility functions
         function showLoading() {
             document.getElementById('loading').style.display = 'flex';
         }
@@ -1702,7 +1651,7 @@ function closeFlowerModal() {
             const historyContainer = document.getElementById('history-container');
 
             if (predictionHistory.length === 0) {
-                historyContainer.innerHTML = '<p style="text-align: center; opacity: 0.7; margin: 2rem 0;">Istoricul va apărea aici după primele predicții</p>';
+                historyContainer.innerHTML = '<p style="text-align: center; opacity: 0.7; margin: 2rem 0;">Istoricul va aparea aici dupa primele predictii</p>';
                 return;
             }
 
@@ -1711,7 +1660,6 @@ function closeFlowerModal() {
                 const historyItem = document.createElement('div');
                 historyItem.className = 'history-item';
 
-                // Handle different data structures (local vs server history)
                 const prediction = item.predictions ? item.predictions[0] : {
                     class: item.predicted_class,
                     confidence: item.confidence
@@ -1737,26 +1685,26 @@ function closeFlowerModal() {
             localStorage.setItem('darkMode', isDarkMode);
 
             const themeText = document.getElementById('theme-text');
-            themeText.textContent = isDarkMode ? 'Mod luminos' : 'Mod întunecat';
+            themeText.textContent = isDarkMode ? 'Mod luminos' : 'Mod intunecat';
         }
 
         function clearHistory() {
             if (isAuthenticated) {
-                showToast('Pentru utilizatori autentificați, istoricul se șterge din profilul personal.');
+                showToast('Pentru utilizatori autentificati, istoricul se sterge din profilul personal.');
                 return;
             }
 
-            if (confirm('Ești sigur că vrei să ștergi istoricul?')) {
+            if (confirm('Esti sigur ca vrei să stergi istoricul?')) {
                 predictionHistory = [];
                 localStorage.removeItem('flowerPredictions');
                 renderHistory();
-                showToast('Istoric șters!');
+                showToast('Istoric sters!');
             }
         }
 
         function exportHistory() {
             if (predictionHistory.length === 0) {
-                showToast('Nu există date pentru export!');
+                showToast('Nu exista date pentru export!');
                 return;
             }
 
@@ -1805,7 +1753,6 @@ function closeFlowerModal() {
             }, 3000);
         }
 
-        // Reset functionality
         resetBtn.addEventListener('click', function() {
             previewContainer.style.display = 'none';
             hideResults();
@@ -1819,10 +1766,9 @@ function closeFlowerModal() {
             }
 
             const resultsContainer = document.getElementById('results-container');
-            resultsContainer.innerHTML = '<p style="text-align: center; opacity: 0.7; margin: 2rem 0;">Încarcă o imagine pentru a vedea rezultatele</p>';
+            resultsContainer.innerHTML = '<p style="text-align: center; opacity: 0.7; margin: 2rem 0;">Incarca o imagine pentru a vedea rezultatele</p>';
         });
 
-        // Modal event listeners
         const modal = document.getElementById('flower-modal');
         const closeBtn = document.getElementsByClassName('close')[0];
 
@@ -1836,7 +1782,6 @@ function closeFlowerModal() {
             }
         }
 
-        // Keyboard shortcuts
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey && e.key === 'u') {
                 e.preventDefault();

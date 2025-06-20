@@ -1,4 +1,3 @@
-from app import app, db, FlowerInfo
 import sqlite3
 import os
 from datetime import datetime
@@ -926,16 +925,16 @@ FLOWER_DATA = {
 }
 
 def setup_complete_database():
-    """Configurează complet baza de date"""
+    """Configureaza complet baza de date"""
 
     if os.path.exists('flower_predictions.db'):
         os.remove('flower_predictions.db')
-        print("🗑️ Baza de date veche ștearsă")
+        print("🗑️ Baza de date veche ștearsa")
 
     conn = sqlite3.connect('flower_predictions.db')
     cursor = conn.cursor()
 
-    print("Creez tabelele...")
+    print("Creez tabelele")
 
     cursor.execute('''
         CREATE TABLE user (
@@ -995,7 +994,7 @@ def setup_complete_database():
 
     print("Admin creat")
 
-    print("Adaug florile...")
+    print("Adaug florile")
     for scientific_name, info in FLOWER_DATA.items():
         cursor.execute('''
             INSERT INTO flower_info 
@@ -1018,8 +1017,8 @@ def setup_complete_database():
     cursor.execute("SELECT COUNT(*) FROM flower_info")
     flower_count = cursor.fetchone()[0]
 
-    print(f"\nFINALIZAT!")
-    print(f"{flower_count} flori adăugate în baza de date")
+    print(f"\nFinalizat!")
+    print(f"{flower_count} flori adaugate în baza de date")
     print(f"Admin: username=admin, password=Admin123.")
 
     conn.close()

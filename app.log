@@ -62,3 +62,34 @@
 2025-06-20 17:58:45,760 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 17:58:45] "[32mGET /profile-api HTTP/1.1[0m" 302 -
 2025-06-20 17:58:45,949 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 17:58:45] "GET /statistics HTTP/1.1" 200 -
 2025-06-20 17:58:46,022 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 17:58:46] "GET /login?next=/profile-api HTTP/1.1" 200 -
+2025-06-20 19:14:03,288 - __main__ - INFO - Baza de date reinitializata
+2025-06-20 19:14:03,543 - __main__ - INFO - Cont admin creat cu succes
+2025-06-20 19:14:03,588 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-20 19:14:03,588 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-06-20 19:14:03,588 - werkzeug - INFO -  * Restarting with stat
+2025-06-20 19:14:08,459 - __main__ - INFO - Baza de date reinitializata
+2025-06-20 19:14:08,679 - __main__ - INFO - Cont admin creat cu succes
+2025-06-20 19:14:08,680 - werkzeug - WARNING -  * Debugger is active!
+2025-06-20 19:14:08,692 - werkzeug - INFO -  * Debugger PIN: 707-566-790
+2025-06-20 19:14:30,707 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 19:14:30] "GET / HTTP/1.1" 200 -
+2025-06-20 19:14:30,929 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 19:14:30] "[32mGET /profile-api HTTP/1.1[0m" 302 -
+2025-06-20 19:14:30,995 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 19:14:30] "GET /statistics HTTP/1.1" 200 -
+2025-06-20 19:14:31,036 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 19:14:31] "GET /login?next=/profile-api HTTP/1.1" 200 -
+2025-06-20 19:14:32,612 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 19:14:32] "GET /login HTTP/1.1" 200 -
+2025-06-20 19:14:34,355 - __main__ - INFO - Utilizator autentificat: admin
+2025-06-20 19:14:34,355 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 19:14:34] "POST /login HTTP/1.1" 200 -
+2025-06-20 19:14:35,896 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 19:14:35] "GET / HTTP/1.1" 200 -
+2025-06-20 19:14:35,938 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 19:14:35] "GET /profile-api HTTP/1.1" 200 -
+2025-06-20 19:14:35,946 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 19:14:35] "GET /statistics HTTP/1.1" 200 -
+2025-06-20 19:14:35,968 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 19:14:35] "GET /my-history HTTP/1.1" 200 -
+2025-06-20 19:15:41,869 - __main__ - INFO - Predictie salvata: common dandelion (99.99%) - User: admin
+2025-06-20 19:15:41,873 - __main__ - INFO - predict executat in 2.75 secunde
+2025-06-20 19:15:41,884 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 19:15:41] "POST /predict HTTP/1.1" 200 -
+2025-06-20 19:15:41,978 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 19:15:41] "GET /my-history HTTP/1.1" 200 -
+2025-06-20 19:15:44,050 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 19:15:44] "GET /flower-info/common%20dandelion HTTP/1.1" 200 -
+2025-06-20 19:17:02,403 - __main__ - INFO - Predictie salvata: sunflower (99.99%) - User: admin
+2025-06-20 19:17:02,418 - __main__ - INFO - predict executat in 0.33 secunde
+2025-06-20 19:17:02,418 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 19:17:02] "POST /predict HTTP/1.1" 200 -
+2025-06-20 19:17:02,439 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 19:17:02] "GET /my-history HTTP/1.1" 200 -
+2025-06-20 19:17:09,038 - werkzeug - INFO - 127.0.0.1 - - [20/Jun/2025 19:17:09] "GET /flower-info/sunflower HTTP/1.1" 200 -
